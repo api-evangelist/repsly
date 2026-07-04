@@ -1,0 +1,91 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Repsly
+providerId: repsly
+created: '2026-07-04'
+modified: '2026-07-04'
+reconciled: false
+tags:
+- Retail Execution
+- Field Sales
+- Merchandising
+- CPG
+- Plans
+description: >-
+  Repsly is sold as a per-user, per-month SaaS subscription, quoted by sales
+  rather than published on a public self-serve pricing page. Pricing scales with
+  the number of user licenses (the per-user rate typically decreases as seat
+  count grows) and the level of features and support. The Repsly Web API (v3) is
+  part of the platform - it is not a separately metered product with its own
+  price - so API access is governed by your Repsly subscription and the API
+  credentials issued in your account's API Settings, not by pay-per-call
+  pricing. The tiers below are modeled from third-party pricing summaries and
+  reseller listings; exact rates and tier names must be confirmed with Repsly
+  sales during reconciliation.
+notes: >-
+  Repsly does not publish public list pricing; figures cited by third parties
+  (roughly $89/month for a single user up to several hundred per month for small
+  teams, custom for larger deployments, plus implementation/onboarding fees) are
+  indicative only. There is no separate API price; the API ships with the
+  subscription. Verify current tiers, minimum seat counts, and any API/feature
+  gating directly with Repsly.
+sources:
+- https://www.repsly.com
+- https://repsly-dev.readme.io/reference/getting-started-1
+- https://www.getapp.com/operations-management-software/a/repsly/pricing/
+- https://www.g2.com/products/repsly/pricing
+plans:
+- id: repsly-subscription
+  name: Repsly Subscription (Per User)
+  type: paid
+  description: >-
+    Core per-user, per-month retail execution subscription covering visits,
+    scheduling, forms, retail audits, photos, order taking, and reporting, with
+    the Web API (v3) available for ERP/CRM integration. Quoted by sales; per-user
+    rate decreases with seat count.
+  entries:
+  - label: Per User License
+    name: per_user_license
+    type: flat
+    metric: seats
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: quote-based per user per month (indicatively from ~$89/user/mo)
+    userMultiplied: true
+  elements:
+  - name: Field Visits and Check-In
+  - name: Scheduling and Routing
+  - name: Forms and Retail Audits
+  - name: Photos and Merchandising
+  - name: Order Taking
+  - name: Reporting
+  - name: Web API (v3) Access
+- id: repsly-enterprise
+  name: Enterprise / Custom
+  type: enterprise
+  description: >-
+    Custom plan for larger field teams and CPG brands, adding advanced
+    reporting, higher support tiers, onboarding/implementation services, and
+    negotiated per-user rates and terms. Contact Repsly.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Volume Per-User Pricing
+  - name: Advanced Reporting
+  - name: Onboarding and Implementation
+  - name: Priority Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

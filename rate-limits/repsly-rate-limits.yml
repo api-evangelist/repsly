@@ -1,0 +1,62 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Repsly
+providerId: repsly
+created: '2026-07-04'
+modified: '2026-07-04'
+reconciled: false
+tags:
+- Retail Execution
+- Field Sales
+- CPG
+- Rate Limiting
+- Quotas
+description: >-
+  Repsly does not publish fixed numeric request-rate limits (requests per
+  minute/hour) for the Web API (v3). The dominant governance mechanism is batch
+  pagination: every export endpoint returns a maximum of 50 records per call,
+  and integrations must iterate - passing the returned timestamp or last-ID
+  cursor - until the response MetaCollectionResult.TotalCount is 0. This bounds
+  how much data any single call moves and shapes polling-style integrations.
+  Import (POST) calls similarly accept bounded batches and are processed
+  asynchronously, with an importJobID to poll for completion. Access is scoped to
+  the account's API credentials (Basic auth over SSL).
+notes: >-
+  No per-account or per-endpoint numeric request limit is documented publicly as
+  of the review date. Design integrations to page in 50-record batches, back off
+  and retry on errors, and poll import job status rather than assuming
+  synchronous completion. Confirm any account-specific throttling with Repsly
+  support.
+sources:
+- https://repsly-dev.readme.io/reference/getting-started-1
+- https://knowledge.repsly.com/hc/en-us/articles/360012729434-How-to-integrate-Repsly-by-using-APIs
+- https://api.repsly.com/v3/help
+responseCodes:
+  throttled: 429
+limits:
+- name: Export Batch Size
+  scope: request
+  metric: records
+  limit: 50 per call
+  notes: Every export endpoint returns at most 50 records; iterate with the cursor until TotalCount is 0.
+- name: API Request Rate
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric requests-per-minute/hour limit is documented for the Web API.
+- name: Import Processing
+  scope: account
+  metric: jobs
+  limit: asynchronous
+  notes: Imports are queued and processed asynchronously; poll /export/importStatus/{importJobID} for completion.
+policies:
+- name: Cursor Pagination
+  description: Export endpoints page by timestamp (lastTimestamp) or last-ID cursor; continue requesting until MetaCollectionResult.TotalCount is 0.
+- name: Asynchronous Imports
+  description: Import (POST) calls return an importJobID; the job status must be polled rather than assuming immediate completion.
+- name: Backoff Strategy
+  description: Clients should implement retry with exponential backoff and honor Retry-After on any 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

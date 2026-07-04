@@ -1,0 +1,288 @@
+{
+  "info": {
+    "name": "Repsly Web API (v3)",
+    "description": "REST interface for exchanging data with the Repsly retail execution and field sales platform. Base URL: https://api.repsly.com/v3. Uses HTTP Basic authentication over SSL with API credentials from the Repsly settings page (API Settings) - not your login username/password. Export endpoints return up to 50 records per call; iterate using the returned timestamp or last-ID cursor until MetaCollectionResult.TotalCount is 0. Import (POST) endpoints insert or update records and return an importJobID to poll.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      { "key": "username", "value": "{{apiUsername}}", "type": "string" },
+      { "key": "password", "value": "{{apiPassword}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.repsly.com/v3", "type": "string" },
+    { "key": "apiUsername", "value": "", "type": "string" },
+    { "key": "apiPassword", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Clients",
+      "item": [
+        {
+          "name": "Export clients",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/clients/:lastTimestamp", "host": ["{{baseUrl}}"], "path": ["export", "clients", ":lastTimestamp"], "variable": [{ "key": "lastTimestamp", "value": "0" }] },
+            "description": "Returns up to 50 clients changed since the timestamp. Start at 0 and page using MetaCollectionResult.LastTimeStamp until TotalCount is 0."
+          }
+        },
+        {
+          "name": "Export client notes",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/clientnotes/:lastClientNoteID", "host": ["{{baseUrl}}"], "path": ["export", "clientnotes", ":lastClientNoteID"], "variable": [{ "key": "lastClientNoteID", "value": "0" }] },
+            "description": "Returns up to 50 client notes with an ID greater than lastClientNoteID. Page using MetaCollectionResult.LastID until TotalCount is 0."
+          }
+        },
+        {
+          "name": "Import clients",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "[\n  {\n    \"Code\": \"CLIENT-001\",\n    \"Name\": \"Example Retailer\",\n    \"Active\": true\n  }\n]" },
+            "url": { "raw": "{{baseUrl}}/import/client", "host": ["{{baseUrl}}"], "path": ["import", "client"] },
+            "description": "Insert or update clients. Repsly decides per record whether to insert or update. Returns an importJobID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Representatives",
+      "item": [
+        {
+          "name": "Export representatives",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/representatives", "host": ["{{baseUrl}}"], "path": ["export", "representatives"] },
+            "description": "Returns all field representatives, including territories, roles, and active status."
+          }
+        },
+        {
+          "name": "Export users",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/users", "host": ["{{baseUrl}}"], "path": ["export", "users"] },
+            "description": "Returns the account's users."
+          }
+        },
+        {
+          "name": "Export daily working time",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/dailyworkingtime/:lastDailyWorkingTimeID", "host": ["{{baseUrl}}"], "path": ["export", "dailyworkingtime", ":lastDailyWorkingTimeID"], "variable": [{ "key": "lastDailyWorkingTimeID", "value": "0" }] },
+            "description": "Returns up to 50 daily working time records with an ID greater than lastDailyWorkingTimeID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Visits",
+      "item": [
+        {
+          "name": "Export visits",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/visits/:lastTimestamp", "host": ["{{baseUrl}}"], "path": ["export", "visits", ":lastTimestamp"], "variable": [{ "key": "lastTimestamp", "value": "0" }] },
+            "description": "Returns up to 50 visits changed since the timestamp. Page using MetaCollectionResult.LastTimeStamp until TotalCount is 0."
+          }
+        },
+        {
+          "name": "Export visit schedules",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/visitschedules/:beginDateTime/:endDateTime", "host": ["{{baseUrl}}"], "path": ["export", "visitschedules", ":beginDateTime", ":endDateTime"], "variable": [{ "key": "beginDateTime", "value": "2026-07-01" }, { "key": "endDateTime", "value": "2026-07-31" }] },
+            "description": "Returns planned visit schedules between beginDateTime and endDateTime for all representatives."
+          }
+        },
+        {
+          "name": "Export visit realizations",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/visit-realizations", "host": ["{{baseUrl}}"], "path": ["export", "visit-realizations"] },
+            "description": "Returns visit schedule realizations - how planned schedules were actually executed."
+          }
+        },
+        {
+          "name": "Import visit schedules",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "[]" },
+            "url": { "raw": "{{baseUrl}}/import/schedule", "host": ["{{baseUrl}}"], "path": ["import", "schedule"] },
+            "description": "Insert or update visit schedules to plan representatives' routes. Returns an importJobID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Export products",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/products/:lastTimestamp", "host": ["{{baseUrl}}"], "path": ["export", "products", ":lastTimestamp"], "variable": [{ "key": "lastTimestamp", "value": "0" }] },
+            "description": "Returns products from the catalog. Timestamp cursor form modeled after the other export endpoints."
+          }
+        },
+        {
+          "name": "Export product lists",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/product-lists", "host": ["{{baseUrl}}"], "path": ["export", "product-lists"] },
+            "description": "Returns product lists (groupings of products)."
+          }
+        },
+        {
+          "name": "Export document types",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/documentTypes/", "host": ["{{baseUrl}}"], "path": ["export", "documentTypes", ""] },
+            "description": "Returns the document types configured on the account."
+          }
+        },
+        {
+          "name": "Import products",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "[]" },
+            "url": { "raw": "{{baseUrl}}/import/product", "host": ["{{baseUrl}}"], "path": ["import", "product"] },
+            "description": "Insert or update products in the catalog. Returns an importJobID."
+          }
+        },
+        {
+          "name": "Import product packages",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "[]" },
+            "url": { "raw": "{{baseUrl}}/import/package", "host": ["{{baseUrl}}"], "path": ["import", "package"] },
+            "description": "Insert or update product packaging definitions. Returns an importJobID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Forms",
+      "item": [
+        {
+          "name": "Export forms",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/forms/:lastFormID", "host": ["{{baseUrl}}"], "path": ["export", "forms", ":lastFormID"], "variable": [{ "key": "lastFormID", "value": "0" }] },
+            "description": "Returns up to 50 completed forms with an ID greater than lastFormID. Page using MetaCollectionResult.LastID until TotalCount is 0."
+          }
+        },
+        {
+          "name": "Export retail audits",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/retailaudits/:lastRetailAuditID", "host": ["{{baseUrl}}"], "path": ["export", "retailaudits", ":lastRetailAuditID"], "variable": [{ "key": "lastRetailAuditID", "value": "0" }] },
+            "description": "Returns up to 50 retail audits with an ID greater than lastRetailAuditID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Photos",
+      "item": [
+        {
+          "name": "Export photos",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/photos/:lastPhotoID", "host": ["{{baseUrl}}"], "path": ["export", "photos", ":lastPhotoID"], "variable": [{ "key": "lastPhotoID", "value": "0" }] },
+            "description": "Returns up to 50 photos with an ID greater than lastPhotoID, including metadata and image URLs."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pricelists",
+      "item": [
+        {
+          "name": "Export pricelists",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/pricelists/", "host": ["{{baseUrl}}"], "path": ["export", "pricelists", ""] },
+            "description": "Returns the list of pricelists configured on the account."
+          }
+        },
+        {
+          "name": "Export pricelist items",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/pricelists/:pricelistID", "host": ["{{baseUrl}}"], "path": ["export", "pricelists", ":pricelistID"], "variable": [{ "key": "pricelistID", "value": "" }] },
+            "description": "Returns the items (products and prices) within a specific pricelist."
+          }
+        },
+        {
+          "name": "Import pricelists",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "[]" },
+            "url": { "raw": "{{baseUrl}}/import/pricelist", "host": ["{{baseUrl}}"], "path": ["import", "pricelist"] },
+            "description": "Insert or update pricelists and their items. Returns an importJobID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Purchase Orders",
+      "item": [
+        {
+          "name": "Export purchase orders",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/purchaseorders/:lastDocumentID", "host": ["{{baseUrl}}"], "path": ["export", "purchaseorders", ":lastDocumentID"], "variable": [{ "key": "lastDocumentID", "value": "0" }] },
+            "description": "Returns up to 50 purchase orders with a document ID greater than lastDocumentID."
+          }
+        },
+        {
+          "name": "Update sales document status",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/import/sales-document-status", "host": ["{{baseUrl}}"], "path": ["import", "sales-document-status"] },
+            "description": "Post a status update back to a sales document after it is processed in the back office. Body fields modeled."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Import",
+      "item": [
+        {
+          "name": "Get import job status",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/export/importStatus/:importJobID", "host": ["{{baseUrl}}"], "path": ["export", "importStatus", ":importJobID"], "variable": [{ "key": "importJobID", "value": "" }] },
+            "description": "Returns the status of a previously submitted import job, identified by the importJobID returned from an import call."
+          }
+        }
+      ]
+    }
+  ]
+}

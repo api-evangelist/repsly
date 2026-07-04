@@ -1,0 +1,237 @@
+aid: repsly
+url: https://raw.githubusercontent.com/api-evangelist/repsly/refs/heads/main/apis.yml
+name: Repsly
+kind: company
+description: >-
+  Repsly is a retail execution and field sales platform for CPG brands and field
+  teams - covering in-store activity, merchandising, retail audits, order taking,
+  and territory management. The Repsly Web API (v3) is a REST interface at
+  https://api.repsly.com/v3 designed for ERP/CRM integration - it moves clients
+  and products into Repsly (import) and pulls clients, visits, retail audits,
+  forms, photos, purchase orders, pricelists, representatives, and schedules back
+  out (export). Requests use HTTP Basic authentication over SSL, exchange JSON or
+  XML, and paginate export results in batches of up to 50 records using timestamp
+  or last-ID cursors until the response MetaCollectionResult TotalCount reaches
+  zero.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Retail Execution
+- Field Sales
+- Merchandising
+- CPG
+- Retail Audits
+- Sales Force Automation
+created: '2026-07-04'
+modified: '2026-07-04'
+specificationVersion: '0.19'
+apis:
+- aid: repsly:repsly-clients-api
+  name: Repsly Clients API
+  tags:
+  - Clients
+  - Client Notes
+  - CRM
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://repsly-dev.readme.io/reference/getting-started-1
+  baseURL: https://api.repsly.com/v3
+  properties:
+  - url: https://repsly-dev.readme.io/reference/getting-started-1
+    type: Documentation
+  - url: https://knowledge.repsly.com/hc/en-us/sections/4408918344723-API-documentation
+    type: APIReference
+  - url: openapi/repsly-openapi.yml
+    type: OpenAPI
+  - url: collections/repsly.postman_collection.json
+    type: PostmanCollection
+  - url: collections/repsly.opencollection.json
+    type: OpenCollection
+  description: Export clients and client notes from Repsly and import (insert or
+    update) client master data from an ERP/CRM. Client export uses a timestamp
+    cursor; client notes use a last-note-ID cursor.
+- aid: repsly:repsly-representatives-api
+  name: Repsly Representatives API
+  tags:
+  - Representatives
+  - Users
+  - Working Time
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://repsly-dev.readme.io/reference/getting-started-1
+  baseURL: https://api.repsly.com/v3
+  properties:
+  - url: https://repsly-dev.readme.io/reference/getting-started-1
+    type: Documentation
+  - url: openapi/repsly-openapi.yml
+    type: OpenAPI
+  - url: collections/repsly.postman_collection.json
+    type: PostmanCollection
+  - url: collections/repsly.opencollection.json
+    type: OpenCollection
+  description: Export the field representatives (and back-office users) on the
+    account along with their territories and permissions, plus daily working time
+    records that log each representative's tracked hours.
+- aid: repsly:repsly-visits-api
+  name: Repsly Visits API
+  tags:
+  - Visits
+  - Schedules
+  - Field Activity
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://repsly-dev.readme.io/reference/getting-started-1
+  baseURL: https://api.repsly.com/v3
+  properties:
+  - url: https://repsly-dev.readme.io/reference/getting-started-1
+    type: Documentation
+  - url: openapi/repsly-openapi.yml
+    type: OpenAPI
+  - url: collections/repsly.postman_collection.json
+    type: PostmanCollection
+  - url: collections/repsly.opencollection.json
+    type: OpenCollection
+  description: Export in-store visits (check-in/check-out, GPS, notes), planned
+    visit schedules over a date range, and visit schedule realizations, and import
+    visit schedules to plan representatives' routes.
+- aid: repsly:repsly-products-api
+  name: Repsly Products API
+  tags:
+  - Products
+  - Product Lists
+  - Catalog
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://repsly-dev.readme.io/reference/getting-started-1
+  baseURL: https://api.repsly.com/v3
+  properties:
+  - url: https://repsly-dev.readme.io/reference/getting-started-1
+    type: Documentation
+  - url: openapi/repsly-openapi.yml
+    type: OpenAPI
+  - url: collections/repsly.postman_collection.json
+    type: PostmanCollection
+  - url: collections/repsly.opencollection.json
+    type: OpenCollection
+  description: Export products, product lists, and document types, and import (insert
+    or update) product catalog and product packaging data from an ERP so mobile
+    reps always work from current SKUs.
+- aid: repsly:repsly-forms-api
+  name: Repsly Forms API
+  tags:
+  - Forms
+  - Retail Audits
+  - Data Collection
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://repsly-dev.readme.io/reference/getting-started-1
+  baseURL: https://api.repsly.com/v3
+  properties:
+  - url: https://repsly-dev.readme.io/reference/getting-started-1
+    type: Documentation
+  - url: openapi/repsly-openapi.yml
+    type: OpenAPI
+  - url: collections/repsly.postman_collection.json
+    type: PostmanCollection
+  - url: collections/repsly.opencollection.json
+    type: OpenCollection
+  description: Export completed custom forms and retail audit results (including
+    matrix answers) captured by representatives in the field, using last-form-ID
+    and last-retail-audit-ID cursors.
+- aid: repsly:repsly-photos-api
+  name: Repsly Photos API
+  tags:
+  - Photos
+  - Merchandising
+  - Media
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://repsly-dev.readme.io/reference/getting-started-1
+  baseURL: https://api.repsly.com/v3
+  properties:
+  - url: https://repsly-dev.readme.io/reference/getting-started-1
+    type: Documentation
+  - url: openapi/repsly-openapi.yml
+    type: OpenAPI
+  - url: collections/repsly.postman_collection.json
+    type: PostmanCollection
+  - url: collections/repsly.opencollection.json
+    type: OpenCollection
+  description: Export photos captured during visits - shelf and display shots,
+    merchandising evidence, and form/audit attachments - with their metadata and
+    URLs, paginated by a last-photo-ID cursor.
+- aid: repsly:repsly-pricelists-api
+  name: Repsly Pricelists API
+  tags:
+  - Pricelists
+  - Pricing
+  - Catalog
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://repsly-dev.readme.io/reference/getting-started-1
+  baseURL: https://api.repsly.com/v3
+  properties:
+  - url: https://repsly-dev.readme.io/reference/getting-started-1
+    type: Documentation
+  - url: openapi/repsly-openapi.yml
+    type: OpenAPI
+  - url: collections/repsly.postman_collection.json
+    type: PostmanCollection
+  - url: collections/repsly.opencollection.json
+    type: OpenCollection
+  description: Export the list of pricelists and the items within a specific
+    pricelist, and import (insert or update) pricelists and their items so order
+    taking uses the correct per-client pricing.
+- aid: repsly:repsly-purchase-orders-api
+  name: Repsly Purchase Orders API
+  tags:
+  - Purchase Orders
+  - Orders
+  - Sales Documents
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://repsly-dev.readme.io/reference/getting-started-1
+  baseURL: https://api.repsly.com/v3
+  properties:
+  - url: https://repsly-dev.readme.io/reference/getting-started-1
+    type: Documentation
+  - url: openapi/repsly-openapi.yml
+    type: OpenAPI
+  - url: collections/repsly.postman_collection.json
+    type: PostmanCollection
+  - url: collections/repsly.opencollection.json
+    type: OpenCollection
+  description: Export purchase orders (and other sales documents) taken by reps in
+    the field, paginated by a last-document-ID cursor, and post status updates back
+    to a sales document after it is processed in the back office.
+- aid: repsly:repsly-import-export-api
+  name: Repsly Import and Export API
+  tags:
+  - Import
+  - Export
+  - Integration
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://repsly-dev.readme.io/reference/getting-started-1
+  baseURL: https://api.repsly.com/v3
+  properties:
+  - url: https://repsly-dev.readme.io/reference/getting-started-1
+    type: Documentation
+  - url: openapi/repsly-openapi.yml
+    type: OpenAPI
+  - url: collections/repsly.postman_collection.json
+    type: PostmanCollection
+  - url: collections/repsly.opencollection.json
+    type: OpenCollection
+  description: The bulk integration surface. Import (POST) clients, products,
+    packages, pricelists, and schedules where Repsly decides per record whether to
+    insert or update, then poll the import job status endpoint by importJobID to
+    confirm completion.
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/repsly
+- type: Website
+  url: https://www.repsly.com
+- type: Documentation
+  url: https://repsly-dev.readme.io/reference/getting-started-1
+- type: Plans
+  url: plans/repsly-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/repsly-rate-limits.yml
+- type: FinOps
+  url: finops/repsly-finops.yml
+- url: https://www.repsly.com/blog
+  type: Blog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

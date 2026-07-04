@@ -1,0 +1,108 @@
+aid: repsly
+name: Repsly
+review:
+  question: Does Repsly expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-04'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Repsly's public developer surface is the
+    Web API (v3), a request/response REST interface over HTTPS at
+    https://api.repsly.com/v3 using HTTP Basic authentication. There is no
+    server-push transport (WebSocket or SSE) on Repsly's public API to model.
+    Data movement is batch-oriented: integrations POST imports and GET exports,
+    paging in 50-record batches by timestamp or last-ID cursor until
+    MetaCollectionResult.TotalCount is 0, and poll an import job status endpoint
+    for asynchronous completion. That is polling, not streaming.
+findings:
+  summary: |
+    Repsly does not publish a documented public WebSocket API. Repsly is a retail
+    execution and field sales platform. Its integration surface is the Repsly
+    Web API (v3), documented at repsly-dev.readme.io and via the in-product
+    reference at https://api.repsly.com/v3/help. It is pure request/response REST
+    over HTTPS, authenticated with HTTP Basic (API credentials issued in the
+    account's API Settings, distinct from the login username/password), and
+    exchanges JSON or XML. Export endpoints return at most 50 records per call
+    and are consumed by iterating a timestamp or last-ID cursor; import endpoints
+    accept batches, return an importJobID, and are polled for status. No
+    realtime, bidirectional, or streaming WebSocket (ws:// or wss://) endpoint is
+    documented anywhere on Repsly's public API as of the review date.
+  openSource: |
+    Repsly is a proprietary, closed-source SaaS product. There is no public,
+    officially maintained open-source repository for the Repsly platform or the
+    Web API. The API is intended for ERP/CRM integration (moving clients and
+    products into Repsly, and pulling clients, visits, audits, forms, photos,
+    orders, and schedules back out).
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.repsly.com/v3
+      documented: true
+      note: Web API v3. HTTP Basic auth over SSL; JSON or XML; export/import resources.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the Repsly Web API reference as of the review date.
+    - protocol: Webhook
+      scheme: https
+      documented: false
+      note: No public outbound webhook/callback API is documented in the v3 developer reference; integration is via GET export and POST import polling.
+  endpointsConfirmedRest:
+    - GET  https://api.repsly.com/v3/export/clients/{lastTimestamp}
+    - GET  https://api.repsly.com/v3/export/clientnotes/{lastClientNoteID}
+    - GET  https://api.repsly.com/v3/export/visits/{lastTimestamp}
+    - GET  https://api.repsly.com/v3/export/retailaudits/{lastRetailAuditID}
+    - GET  https://api.repsly.com/v3/export/purchaseorders/{lastDocumentID}
+    - GET  https://api.repsly.com/v3/export/documentTypes/
+    - GET  https://api.repsly.com/v3/export/pricelists/
+    - GET  https://api.repsly.com/v3/export/pricelists/{pricelistID}
+    - GET  https://api.repsly.com/v3/export/forms/{lastFormID}
+    - GET  https://api.repsly.com/v3/export/photos/{lastPhotoID}
+    - GET  https://api.repsly.com/v3/export/dailyworkingtime/{lastDailyWorkingTimeID}
+    - GET  https://api.repsly.com/v3/export/visitschedules/{beginDateTime}/{endDateTime}
+    - GET  https://api.repsly.com/v3/export/representatives
+    - GET  https://api.repsly.com/v3/export/importStatus/{importJobID}
+    - POST https://api.repsly.com/v3/import/client
+    - POST https://api.repsly.com/v3/import/product
+    - POST https://api.repsly.com/v3/import/package
+    - POST https://api.repsly.com/v3/import/pricelist
+    - POST https://api.repsly.com/v3/import/schedule
+  endpointsModeled:
+    - GET  https://api.repsly.com/v3/export/products/{lastTimestamp}
+    - GET  https://api.repsly.com/v3/export/product-lists
+    - GET  https://api.repsly.com/v3/export/users
+    - GET  https://api.repsly.com/v3/export/visit-realizations
+    - POST https://api.repsly.com/v3/import/sales-document-status
+  endpointsModeledNote: |
+    The five endpoints above are listed as resources in Repsly's current ReadMe
+    reference (products, product lists, users, visit schedule realizations, and
+    the sales document status update) but were not present with a fully quoted
+    path/parameter form in the May v3 developer PDF. Paths reflect the ReadMe
+    listing; the pagination/cursor parameter shapes (e.g. the {lastTimestamp} on
+    products) are modeled after the confirmed export endpoints and should be
+    verified against the live reference at https://api.repsly.com/v3/help.
+sources:
+  - url: https://repsly-dev.readme.io/reference/getting-started-1
+    type: Documentation
+    note: About the API - Basic auth, JSON/XML, 50-record export batches, cursor pagination.
+  - url: https://repsly-dev.readme.io/reference/about-the-api-test
+    type: Documentation
+    note: Authentication - HTTP Basic over SSL with Base64-encoded API credentials from API Settings.
+  - url: https://content.repsly.com/hubfs/Customer%20Success%20-%20Sanja/Repsly%20Integration%20_%20%20API%20Updates/API%20v3%20Developer%20documentation%20-%20May.pdf
+    type: Documentation
+    note: v3 developer PDF - exact import/export paths and MetaCollectionResult pagination fields. Base https://api.repsly.com/v3, reference at /v3/help.
+  - url: https://knowledge.repsly.com/hc/en-us/articles/360012729434-How-to-integrate-Repsly-by-using-APIs
+    type: Documentation
+    note: Integration overview - full list of import/export/update endpoint categories.
+  - url: https://repsly-dev.readme.io/reference/product-list
+    type: APIReference
+    note: Confirms products, product-lists, users, visit-realizations, and sales-document-status resources.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or other server-push protocol surface exists on Repsly's public
+    API. The API is request/response REST (Web API v3) with batch export/import
+    and job-status polling. No AsyncAPI document was created because there is no
+    streaming transport on Repsly's own API to model.

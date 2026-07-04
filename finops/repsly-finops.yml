@@ -1,0 +1,77 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Repsly
+providerId: repsly
+created: '2026-07-04'
+modified: '2026-07-04'
+reconciled: false
+tags:
+- Retail Execution
+- Field Sales
+- CPG
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Repsly spend. Repsly is a per-user, per-month SaaS
+  subscription; cost is driven primarily by the number of user licenses (field
+  reps and back-office users) and the feature/support tier, not by API call
+  volume. The Web API (v3) is included in the subscription and is not separately
+  metered, so there is no per-request API charge to allocate - the API's cost is
+  the seat cost of the users whose data it moves, plus the engineering cost of
+  building and running the ERP/CRM integration. Implementation, onboarding, and
+  training are typically one-time or add-on charges.
+notes: >-
+  Repsly does not publish public per-seat rates; treat cost figures as
+  indicative and confirm with sales. Because billing is seat-based, the main
+  FinOps levers are license count, tier selection, and deactivating unused
+  seats - not API usage. Verify invoice structure and any implementation fees
+  during reconciliation.
+sources:
+- https://www.repsly.com
+- https://repsly-dev.readme.io/reference/getting-started-1
+- https://www.getapp.com/operations-management-software/a/repsly/pricing/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Repsly
+serviceCategory: Retail Execution and Field Sales Software
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+meters:
+- name: user_seats
+  description: Active Repsly user licenses (field reps and back-office users), billed per user per month.
+  unit: seats
+  aggregation: sum
+  dimensions:
+  - account
+  - team
+  - role
+- name: implementation
+  description: One-time onboarding, implementation, and training services.
+  unit: engagements
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track active seat count and tier against the monthly subscription invoice; API usage is not separately billed.
+- name: Allocation
+  description: Map user seats to teams, territories, and roles so subscription cost aligns to the field organization.
+- name: Optimization
+  description: Deactivate unused or seasonal seats, right-size the feature/support tier, and consolidate integration engineering rather than optimizing per-call API spend.
+- name: Accountability
+  description: Assign an owner for the Repsly subscription and review seat count and tier each billing cycle.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

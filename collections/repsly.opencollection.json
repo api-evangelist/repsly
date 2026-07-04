@@ -1,0 +1,279 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Repsly Web API (v3)",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{apiUsername}}",
+      "password": "{{apiPassword}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Clients", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Export clients", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/clients/:lastTimestamp",
+            "params": [
+              { "name": "lastTimestamp", "value": "0", "type": "path", "description": "Timestamp cursor; start at 0, then pass MetaCollectionResult.LastTimeStamp." }
+            ]
+          },
+          "docs": "Returns up to 50 clients changed since the timestamp. Iterate until MetaCollectionResult.TotalCount is 0."
+        },
+        {
+          "info": { "name": "Export client notes", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/clientnotes/:lastClientNoteID",
+            "params": [
+              { "name": "lastClientNoteID", "value": "0", "type": "path", "description": "Last client note ID already retrieved; start at 0." }
+            ]
+          },
+          "docs": "Returns up to 50 client notes with an ID greater than lastClientNoteID."
+        },
+        {
+          "info": { "name": "Import clients", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.repsly.com/v3/import/client",
+            "body": { "type": "json", "data": "[\n  {\n    \"Code\": \"CLIENT-001\",\n    \"Name\": \"Example Retailer\",\n    \"Active\": true\n  }\n]" }
+          },
+          "docs": "Insert or update clients. Repsly decides per record whether to insert or update. Returns an importJobID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Representatives", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Export representatives", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.repsly.com/v3/export/representatives" },
+          "docs": "Returns all field representatives, including territories, roles, and active status."
+        },
+        {
+          "info": { "name": "Export users", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.repsly.com/v3/export/users" },
+          "docs": "Returns the account's users."
+        },
+        {
+          "info": { "name": "Export daily working time", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/dailyworkingtime/:lastDailyWorkingTimeID",
+            "params": [
+              { "name": "lastDailyWorkingTimeID", "value": "0", "type": "path", "description": "Last daily working time ID already retrieved; start at 0." }
+            ]
+          },
+          "docs": "Returns up to 50 daily working time records with an ID greater than lastDailyWorkingTimeID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Visits", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Export visits", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/visits/:lastTimestamp",
+            "params": [
+              { "name": "lastTimestamp", "value": "0", "type": "path", "description": "Timestamp cursor; start at 0." }
+            ]
+          },
+          "docs": "Returns up to 50 visits changed since the timestamp."
+        },
+        {
+          "info": { "name": "Export visit schedules", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/visitschedules/:beginDateTime/:endDateTime",
+            "params": [
+              { "name": "beginDateTime", "value": "2026-07-01", "type": "path", "description": "Start of the date range." },
+              { "name": "endDateTime", "value": "2026-07-31", "type": "path", "description": "End of the date range." }
+            ]
+          },
+          "docs": "Returns planned visit schedules between beginDateTime and endDateTime for all representatives."
+        },
+        {
+          "info": { "name": "Export visit realizations", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.repsly.com/v3/export/visit-realizations" },
+          "docs": "Returns visit schedule realizations - how planned schedules were actually executed."
+        },
+        {
+          "info": { "name": "Import visit schedules", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.repsly.com/v3/import/schedule",
+            "body": { "type": "json", "data": "[]" }
+          },
+          "docs": "Insert or update visit schedules to plan representatives' routes. Returns an importJobID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Products", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Export products", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/products/:lastTimestamp",
+            "params": [
+              { "name": "lastTimestamp", "value": "0", "type": "path", "description": "Timestamp cursor (modeled); start at 0." }
+            ]
+          },
+          "docs": "Returns products from the catalog. Timestamp cursor form modeled after the other export endpoints."
+        },
+        {
+          "info": { "name": "Export product lists", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.repsly.com/v3/export/product-lists" },
+          "docs": "Returns product lists (groupings of products)."
+        },
+        {
+          "info": { "name": "Export document types", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.repsly.com/v3/export/documentTypes/" },
+          "docs": "Returns the document types configured on the account."
+        },
+        {
+          "info": { "name": "Import products", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.repsly.com/v3/import/product",
+            "body": { "type": "json", "data": "[]" }
+          },
+          "docs": "Insert or update products in the catalog. Returns an importJobID."
+        },
+        {
+          "info": { "name": "Import product packages", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.repsly.com/v3/import/package",
+            "body": { "type": "json", "data": "[]" }
+          },
+          "docs": "Insert or update product packaging definitions. Returns an importJobID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Forms", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Export forms", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/forms/:lastFormID",
+            "params": [
+              { "name": "lastFormID", "value": "0", "type": "path", "description": "Last form ID already retrieved; start at 0." }
+            ]
+          },
+          "docs": "Returns up to 50 completed forms with an ID greater than lastFormID."
+        },
+        {
+          "info": { "name": "Export retail audits", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/retailaudits/:lastRetailAuditID",
+            "params": [
+              { "name": "lastRetailAuditID", "value": "0", "type": "path", "description": "Last retail audit ID already retrieved; start at 0." }
+            ]
+          },
+          "docs": "Returns up to 50 retail audits with an ID greater than lastRetailAuditID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Photos", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Export photos", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/photos/:lastPhotoID",
+            "params": [
+              { "name": "lastPhotoID", "value": "0", "type": "path", "description": "Last photo ID already retrieved; start at 0." }
+            ]
+          },
+          "docs": "Returns up to 50 photos with an ID greater than lastPhotoID, including metadata and image URLs."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Pricelists", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Export pricelists", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.repsly.com/v3/export/pricelists/" },
+          "docs": "Returns the list of pricelists configured on the account."
+        },
+        {
+          "info": { "name": "Export pricelist items", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/pricelists/:pricelistID",
+            "params": [
+              { "name": "pricelistID", "value": "", "type": "path", "description": "The ID of the pricelist whose items to export." }
+            ]
+          },
+          "docs": "Returns the items (products and prices) within a specific pricelist."
+        },
+        {
+          "info": { "name": "Import pricelists", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.repsly.com/v3/import/pricelist",
+            "body": { "type": "json", "data": "[]" }
+          },
+          "docs": "Insert or update pricelists and their items. Returns an importJobID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Purchase Orders", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Export purchase orders", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/purchaseorders/:lastDocumentID",
+            "params": [
+              { "name": "lastDocumentID", "value": "0", "type": "path", "description": "Last document ID already retrieved; start at 0." }
+            ]
+          },
+          "docs": "Returns up to 50 purchase orders with a document ID greater than lastDocumentID."
+        },
+        {
+          "info": { "name": "Update sales document status", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.repsly.com/v3/import/sales-document-status",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Post a status update back to a sales document after it is processed in the back office. Body fields modeled."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Import", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get import job status", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/importStatus/:importJobID",
+            "params": [
+              { "name": "importJobID", "value": "", "type": "path", "description": "The import job ID returned by an import call." }
+            ]
+          },
+          "docs": "Returns the status of a previously submitted import job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

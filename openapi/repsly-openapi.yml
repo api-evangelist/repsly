@@ -1,0 +1,669 @@
+openapi: 3.0.3
+info:
+  title: Repsly Web API
+  description: >-
+    The Repsly Web API (v3) is a REST interface for exchanging data with the
+    Repsly retail execution and field sales platform. It is designed for ERP/CRM
+    integration: import (POST) moves clients and products into Repsly, and export
+    (GET) pulls clients, client notes, visits, retail audits, purchase orders,
+    document types, products, pricelists, forms, photos, daily working time,
+    visit schedules, and representatives back out. All requests use HTTP Basic
+    authentication (API credentials from the Repsly settings page, NOT the login
+    username/password) over SSL, and accept or return JSON or XML. Export
+    endpoints return a maximum of 50 records per call; clients iterate using a
+    timestamp or last-ID cursor and stop when the response
+    MetaCollectionResult.TotalCount is 0.
+
+    Endpoint paths and verbs for the export/import surface are grounded in
+    Repsly's published v3 developer documentation. Request/response schemas below
+    are modeled generically (the docs describe fields per entity but do not
+    publish a machine-readable OpenAPI); treat property-level detail as modeled
+    and confirm exact field names against the live reference at
+    https://api.repsly.com/v3/help.
+  version: '3.0'
+  contact:
+    name: Repsly
+    url: https://www.repsly.com
+servers:
+  - url: https://api.repsly.com/v3
+    description: Repsly Web API v3 (production)
+security:
+  - basicAuth: []
+tags:
+  - name: Clients
+    description: Export and import clients and client notes.
+  - name: Representatives
+    description: Export representatives, users, and daily working time.
+  - name: Visits
+    description: Export visits, visit schedules, and realizations; import schedules.
+  - name: Products
+    description: Export and import products, product lists, packages, and document types.
+  - name: Forms
+    description: Export completed forms and retail audits.
+  - name: Photos
+    description: Export photos captured in the field.
+  - name: Pricelists
+    description: Export and import pricelists and pricelist items.
+  - name: Purchase Orders
+    description: Export purchase orders and update sales document status.
+  - name: Import
+    description: Bulk import surface and import job status.
+paths:
+  /export/clients/{lastTimestamp}:
+    get:
+      operationId: exportClients
+      tags: [Clients]
+      summary: Export clients
+      description: >-
+        Returns up to 50 clients changed since the given timestamp. Start with
+        lastTimestamp = 0 to get the full list, then pass the returned
+        MetaCollectionResult.LastTimeStamp until TotalCount is 0.
+      parameters:
+        - $ref: '#/components/parameters/LastTimestamp'
+      responses:
+        '200':
+          description: A batch of clients with collection metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/clientnotes/{lastClientNoteID}:
+    get:
+      operationId: exportClientNotes
+      tags: [Clients]
+      summary: Export client notes
+      description: >-
+        Returns up to 50 client notes with an ID greater than lastClientNoteID.
+        Start with 0 and page using MetaCollectionResult.LastID until TotalCount
+        is 0.
+      parameters:
+        - $ref: '#/components/parameters/LastClientNoteID'
+      responses:
+        '200':
+          description: A batch of client notes with collection metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /import/client:
+    post:
+      operationId: importClients
+      tags: [Clients]
+      summary: Import clients
+      description: >-
+        Insert or update one or more clients. Repsly decides per record whether
+        to insert or update. Returns an ImportResult with an importJobID that can
+        be polled via /export/importStatus/{importJobID}.
+      requestBody:
+        $ref: '#/components/requestBodies/ImportBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ImportAccepted'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/representatives:
+    get:
+      operationId: exportRepresentatives
+      tags: [Representatives]
+      summary: Export representatives
+      description: >-
+        Returns all field representatives on the account, including their
+        territories, roles, and active status.
+      responses:
+        '200':
+          description: A collection of representatives.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/users:
+    get:
+      operationId: exportUsers
+      tags: [Representatives]
+      summary: Export users
+      description: >-
+        Returns the account's users. Path grounded in Repsly's v3 reference;
+        pagination/cursor parameters are modeled - confirm against the live
+        reference.
+      responses:
+        '200':
+          description: A collection of users.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/dailyworkingtime/{lastDailyWorkingTimeID}:
+    get:
+      operationId: exportDailyWorkingTime
+      tags: [Representatives]
+      summary: Export daily working time
+      description: >-
+        Returns up to 50 daily working time records with an ID greater than
+        lastDailyWorkingTimeID. Page using MetaCollectionResult.LastID until
+        TotalCount is 0.
+      parameters:
+        - name: lastDailyWorkingTimeID
+          in: path
+          required: true
+          description: Last daily working time ID already retrieved; start at 0.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A batch of daily working time records.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/visits/{lastTimestamp}:
+    get:
+      operationId: exportVisits
+      tags: [Visits]
+      summary: Export visits
+      description: >-
+        Returns up to 50 visits changed since the given timestamp. Start with 0
+        and page using MetaCollectionResult.LastTimeStamp until TotalCount is 0.
+      parameters:
+        - $ref: '#/components/parameters/LastTimestamp'
+      responses:
+        '200':
+          description: A batch of visits with collection metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/visitschedules/{beginDateTime}/{endDateTime}:
+    get:
+      operationId: exportVisitSchedules
+      tags: [Visits]
+      summary: Export visit schedules
+      description: >-
+        Returns planned visit schedules between beginDateTime and endDateTime
+        (inclusive), for all representatives.
+      parameters:
+        - name: beginDateTime
+          in: path
+          required: true
+          description: Start of the date range (e.g. 2026-07-01).
+          schema:
+            type: string
+        - name: endDateTime
+          in: path
+          required: true
+          description: End of the date range (e.g. 2026-07-31).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A collection of visit schedules.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/visit-realizations:
+    get:
+      operationId: exportVisitRealizations
+      tags: [Visits]
+      summary: Export visit schedule realizations
+      description: >-
+        Returns visit schedule realizations - how planned schedules were actually
+        executed. Path grounded in Repsly's v3 reference; cursor parameters are
+        modeled.
+      responses:
+        '200':
+          description: A collection of visit realizations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /import/schedule:
+    post:
+      operationId: importSchedules
+      tags: [Visits]
+      summary: Import visit schedules
+      description: >-
+        Insert or update visit schedules to plan representatives' routes. Returns
+        an importJobID for status polling.
+      requestBody:
+        $ref: '#/components/requestBodies/ImportBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ImportAccepted'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/products/{lastTimestamp}:
+    get:
+      operationId: exportProducts
+      tags: [Products]
+      summary: Export products
+      description: >-
+        Returns products from the catalog. Resource and path grounded in Repsly's
+        v3 reference; the timestamp cursor form is modeled after the other export
+        endpoints - confirm against the live reference.
+      parameters:
+        - $ref: '#/components/parameters/LastTimestamp'
+      responses:
+        '200':
+          description: A batch of products.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/product-lists:
+    get:
+      operationId: exportProductLists
+      tags: [Products]
+      summary: Export product lists
+      description: >-
+        Returns product lists (groupings of products). Path grounded in Repsly's
+        v3 reference.
+      responses:
+        '200':
+          description: A collection of product lists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/documentTypes/:
+    get:
+      operationId: exportDocumentTypes
+      tags: [Products]
+      summary: Export document types
+      description: >-
+        Returns the document types configured on the account (used to classify
+        sales documents and purchase orders).
+      responses:
+        '200':
+          description: A collection of document types.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /import/product:
+    post:
+      operationId: importProducts
+      tags: [Products]
+      summary: Import products
+      description: >-
+        Insert or update products in the catalog. Returns an importJobID for
+        status polling.
+      requestBody:
+        $ref: '#/components/requestBodies/ImportBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ImportAccepted'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /import/package:
+    post:
+      operationId: importPackages
+      tags: [Products]
+      summary: Import product packages
+      description: >-
+        Insert or update product packaging definitions. Returns an importJobID
+        for status polling.
+      requestBody:
+        $ref: '#/components/requestBodies/ImportBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ImportAccepted'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/retailaudits/{lastRetailAuditID}:
+    get:
+      operationId: exportRetailAudits
+      tags: [Forms]
+      summary: Export retail audits
+      description: >-
+        Returns up to 50 retail audits with an ID greater than lastRetailAuditID.
+        Start with 0 and page using MetaCollectionResult.LastID until TotalCount
+        is 0.
+      parameters:
+        - name: lastRetailAuditID
+          in: path
+          required: true
+          description: Last retail audit ID already retrieved; start at 0.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A batch of retail audits with collection metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/forms/{lastFormID}:
+    get:
+      operationId: exportForms
+      tags: [Forms]
+      summary: Export forms
+      description: >-
+        Returns up to 50 completed forms with an ID greater than lastFormID.
+        Start with 0 and page using MetaCollectionResult.LastID until TotalCount
+        is 0. A matrix variant returns matrix-style form answers.
+      parameters:
+        - name: lastFormID
+          in: path
+          required: true
+          description: Last form ID already retrieved; start at 0.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A batch of forms with collection metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/photos/{lastPhotoID}:
+    get:
+      operationId: exportPhotos
+      tags: [Photos]
+      summary: Export photos
+      description: >-
+        Returns up to 50 photos with an ID greater than lastPhotoID, including
+        metadata and image URLs. Start with 0 and page using
+        MetaCollectionResult.LastID until TotalCount is 0.
+      parameters:
+        - name: lastPhotoID
+          in: path
+          required: true
+          description: Last photo ID already retrieved; start at 0.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A batch of photos with collection metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/pricelists/:
+    get:
+      operationId: exportPricelists
+      tags: [Pricelists]
+      summary: Export pricelists
+      description: Returns the list of pricelists configured on the account.
+      responses:
+        '200':
+          description: A collection of pricelists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/pricelists/{pricelistID}:
+    get:
+      operationId: exportPricelistItems
+      tags: [Pricelists]
+      summary: Export pricelist items
+      description: Returns the items (products and prices) within a specific pricelist.
+      parameters:
+        - name: pricelistID
+          in: path
+          required: true
+          description: The ID of the pricelist whose items to export.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A collection of pricelist items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /import/pricelist:
+    post:
+      operationId: importPricelists
+      tags: [Pricelists]
+      summary: Import pricelists
+      description: >-
+        Insert or update pricelists and their items. Returns an importJobID for
+        status polling.
+      requestBody:
+        $ref: '#/components/requestBodies/ImportBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ImportAccepted'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/purchaseorders/{lastDocumentID}:
+    get:
+      operationId: exportPurchaseOrders
+      tags: [Purchase Orders]
+      summary: Export purchase orders
+      description: >-
+        Returns up to 50 purchase orders with a document ID greater than
+        lastDocumentID. Start with 0 and page using MetaCollectionResult.LastID
+        until TotalCount is 0.
+      parameters:
+        - name: lastDocumentID
+          in: path
+          required: true
+          description: Last document ID already retrieved; start at 0.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A batch of purchase orders with collection metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /import/sales-document-status:
+    post:
+      operationId: updateSalesDocumentStatus
+      tags: [Purchase Orders]
+      summary: Update sales document status
+      description: >-
+        Post a status update back to a sales document (e.g. a purchase order)
+        after it is processed in the back office. Path grounded in Repsly's v3
+        reference; body fields are modeled.
+      requestBody:
+        $ref: '#/components/requestBodies/ImportBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ImportAccepted'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/importStatus/{importJobID}:
+    get:
+      operationId: getImportStatus
+      tags: [Import]
+      summary: Get import job status
+      description: >-
+        Returns the status of a previously submitted import job, identified by
+        the importJobID returned from an import (POST) call.
+      parameters:
+        - name: importJobID
+          in: path
+          required: true
+          description: The import job ID returned by an import call.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The status of the import job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic authentication over SSL. Use the API username and password
+        from the Repsly settings page (API Settings) - these differ from your
+        Repsly login credentials.
+  parameters:
+    LastTimestamp:
+      name: lastTimestamp
+      in: path
+      required: true
+      description: >-
+        Timestamp cursor. Start at 0 for a full export, then pass the returned
+        MetaCollectionResult.LastTimeStamp on each subsequent call.
+      schema:
+        type: integer
+        format: int64
+    LastClientNoteID:
+      name: lastClientNoteID
+      in: path
+      required: true
+      description: Last client note ID already retrieved; start at 0.
+      schema:
+        type: integer
+        format: int64
+  requestBodies:
+    ImportBody:
+      required: true
+      description: >-
+        A batch of entities to insert or update. Repsly decides per record
+        whether to insert or update. Accepts JSON or XML; field schema depends on
+        the entity being imported.
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+  responses:
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ImportAccepted:
+      description: The import was accepted; the result includes an importJobID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ImportResult'
+  schemas:
+    MetaCollectionResult:
+      type: object
+      description: >-
+        Pagination metadata returned with export collections. Iterate until
+        TotalCount is 0.
+      properties:
+        TotalCount:
+          type: integer
+          description: Total count of records in this batch (0 means no more records).
+        LastTimeStamp:
+          type: integer
+          format: int64
+          description: Timestamp cursor for the next request (timestamp-paged endpoints).
+        FirstID:
+          type: integer
+          format: int64
+          description: Unique ID of the first item in the list (ID-paged endpoints).
+        LastID:
+          type: integer
+          format: int64
+          description: Unique ID of the last item in the list (ID-paged endpoints).
+    GenericCollection:
+      type: object
+      description: >-
+        Generic export collection envelope. Each export endpoint returns an
+        entity array plus MetaCollectionResult; entity fields are documented per
+        resource in the Repsly reference and are modeled here.
+      properties:
+        MetaCollectionResult:
+          $ref: '#/components/schemas/MetaCollectionResult'
+        Data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    ClientCollection:
+      type: object
+      properties:
+        MetaCollectionResult:
+          $ref: '#/components/schemas/MetaCollectionResult'
+        Clients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Client'
+    Client:
+      type: object
+      description: >-
+        A Repsly client (retail location / account). Fields modeled from the v3
+        reference; confirm exact names against the live documentation.
+      properties:
+        ClientID:
+          type: integer
+          format: int64
+        Code:
+          type: string
+        Name:
+          type: string
+        Active:
+          type: boolean
+        Address1:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        Email:
+          type: string
+        Phone:
+          type: string
+    ImportResult:
+      type: object
+      description: Result of an import (POST) call, including the job identifier.
+      properties:
+        importJobID:
+          type: string
+        status:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
