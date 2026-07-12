@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/repsly-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic authentication over SSL. Use the API username and password from the
+    Repsly settings page (API Settings) - these differ from your Repsly login credentials.
+  sources:
+  - openapi/repsly-openapi.yml

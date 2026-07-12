@@ -218,6 +218,12 @@ apis:
     insert or update, then poll the import job status endpoint by importJobID to
     confirm completion.
 common:
+- type: TrustCenter
+  url: security/repsly-trust-center.yml
+- type: DomainSecurity
+  url: security/repsly-domain-security.yml
+- type: Authentication
+  url: authentication/repsly-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/repsly
 - type: Website
