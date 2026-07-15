@@ -218,6 +218,8 @@ apis:
     insert or update, then poll the import job status endpoint by importJobID to
     confirm completion.
 common:
+- type: AgenticAccess
+  url: agentic-access/repsly-agentic-access.yml
 - type: TrustCenter
   url: security/repsly-trust-center.yml
 - type: DomainSecurity
