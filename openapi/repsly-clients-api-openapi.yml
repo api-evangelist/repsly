@@ -1,0 +1,192 @@
+openapi: 3.0.3
+info:
+  title: Repsly Web Clients API
+  description: 'The Repsly Web API (v3) is a REST interface for exchanging data with the Repsly retail execution and field sales platform. It is designed for ERP/CRM integration: import (POST) moves clients and products into Repsly, and export (GET) pulls clients, client notes, visits, retail audits, purchase orders, document types, products, pricelists, forms, photos, daily working time, visit schedules, and representatives back out. All requests use HTTP Basic authentication (API credentials from the Repsly settings page, NOT the login username/password) over SSL, and accept or return JSON or XML. Export endpoints return a maximum of 50 records per call; clients iterate using a timestamp or last-ID cursor and stop when the response MetaCollectionResult.TotalCount is 0.
+
+    Endpoint paths and verbs for the export/import surface are grounded in Repsly''s published v3 developer documentation. Request/response schemas below are modeled generically (the docs describe fields per entity but do not publish a machine-readable OpenAPI); treat property-level detail as modeled and confirm exact field names against the live reference at https://api.repsly.com/v3/help.'
+  version: '3.0'
+  contact:
+    name: Repsly
+    url: https://www.repsly.com
+servers:
+- url: https://api.repsly.com/v3
+  description: Repsly Web API v3 (production)
+security:
+- basicAuth: []
+tags:
+- name: Clients
+  description: Export and import clients and client notes.
+paths:
+  /export/clients/{lastTimestamp}:
+    get:
+      operationId: exportClients
+      tags:
+      - Clients
+      summary: Export clients
+      description: Returns up to 50 clients changed since the given timestamp. Start with lastTimestamp = 0 to get the full list, then pass the returned MetaCollectionResult.LastTimeStamp until TotalCount is 0.
+      parameters:
+      - $ref: '#/components/parameters/LastTimestamp'
+      responses:
+        '200':
+          description: A batch of clients with collection metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /export/clientnotes/{lastClientNoteID}:
+    get:
+      operationId: exportClientNotes
+      tags:
+      - Clients
+      summary: Export client notes
+      description: Returns up to 50 client notes with an ID greater than lastClientNoteID. Start with 0 and page using MetaCollectionResult.LastID until TotalCount is 0.
+      parameters:
+      - $ref: '#/components/parameters/LastClientNoteID'
+      responses:
+        '200':
+          description: A batch of client notes with collection metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /import/client:
+    post:
+      operationId: importClients
+      tags:
+      - Clients
+      summary: Import clients
+      description: Insert or update one or more clients. Repsly decides per record whether to insert or update. Returns an ImportResult with an importJobID that can be polled via /export/importStatus/{importJobID}.
+      requestBody:
+        $ref: '#/components/requestBodies/ImportBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ImportAccepted'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  requestBodies:
+    ImportBody:
+      required: true
+      description: A batch of entities to insert or update. Repsly decides per record whether to insert or update. Accepts JSON or XML; field schema depends on the entity being imported.
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+  parameters:
+    LastClientNoteID:
+      name: lastClientNoteID
+      in: path
+      required: true
+      description: Last client note ID already retrieved; start at 0.
+      schema:
+        type: integer
+        format: int64
+    LastTimestamp:
+      name: lastTimestamp
+      in: path
+      required: true
+      description: Timestamp cursor. Start at 0 for a full export, then pass the returned MetaCollectionResult.LastTimeStamp on each subsequent call.
+      schema:
+        type: integer
+        format: int64
+  schemas:
+    GenericCollection:
+      type: object
+      description: Generic export collection envelope. Each export endpoint returns an entity array plus MetaCollectionResult; entity fields are documented per resource in the Repsly reference and are modeled here.
+      properties:
+        MetaCollectionResult:
+          $ref: '#/components/schemas/MetaCollectionResult'
+        Data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    ClientCollection:
+      type: object
+      properties:
+        MetaCollectionResult:
+          $ref: '#/components/schemas/MetaCollectionResult'
+        Clients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Client'
+    Client:
+      type: object
+      description: A Repsly client (retail location / account). Fields modeled from the v3 reference; confirm exact names against the live documentation.
+      properties:
+        ClientID:
+          type: integer
+          format: int64
+        Code:
+          type: string
+        Name:
+          type: string
+        Active:
+          type: boolean
+        Address1:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        Email:
+          type: string
+        Phone:
+          type: string
+    ImportResult:
+      type: object
+      description: Result of an import (POST) call, including the job identifier.
+      properties:
+        importJobID:
+          type: string
+        status:
+          type: string
+    MetaCollectionResult:
+      type: object
+      description: Pagination metadata returned with export collections. Iterate until TotalCount is 0.
+      properties:
+        TotalCount:
+          type: integer
+          description: Total count of records in this batch (0 means no more records).
+        LastTimeStamp:
+          type: integer
+          format: int64
+          description: Timestamp cursor for the next request (timestamp-paged endpoints).
+        FirstID:
+          type: integer
+          format: int64
+          description: Unique ID of the first item in the list (ID-paged endpoints).
+        LastID:
+          type: integer
+          format: int64
+          description: Unique ID of the last item in the list (ID-paged endpoints).
+  responses:
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ImportAccepted:
+      description: The import was accepted; the result includes an importJobID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ImportResult'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication over SSL. Use the API username and password from the Repsly settings page (API Settings) - these differ from your Repsly login credentials.
