@@ -1,0 +1,30 @@
+{
+  "provider": "repsly",
+  "sources": [
+    "repsly-clients-api-openapi.yml",
+    "repsly-forms-api-openapi.yml",
+    "repsly-import-api-openapi.yml",
+    "repsly-photos-api-openapi.yml",
+    "repsly-pricelists-api-openapi.yml",
+    "repsly-products-api-openapi.yml",
+    "repsly-purchase-orders-api-openapi.yml",
+    "repsly-representatives-api-openapi.yml",
+    "repsly-visits-api-openapi.yml"
+  ],
+  "outputs": [
+    "repsly-clients-api-openapi.yml",
+    "repsly-forms-api-openapi.yml",
+    "repsly-import-api-openapi.yml",
+    "repsly-photos-api-openapi.yml",
+    "repsly-pricelists-api-openapi.yml",
+    "repsly-products-api-openapi.yml",
+    "repsly-purchase-orders-api-openapi.yml",
+    "repsly-representatives-api-openapi.yml",
+    "repsly-visits-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
