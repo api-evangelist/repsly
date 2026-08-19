@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Repsly Web Clients Forms API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Forms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export retail audits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/retailaudits/:lastRetailAuditID",
+            "params": [
+              {
+                "name": "lastRetailAuditID",
+                "value": "",
+                "type": "path",
+                "description": "Last retail audit ID already retrieved; start at 0."
+              }
+            ]
+          },
+          "docs": "Returns up to 50 retail audits with an ID greater than lastRetailAuditID. Start with 0 and page using MetaCollectionResult.LastID until TotalCount is 0."
+        },
+        {
+          "info": {
+            "name": "Export forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/forms/:lastFormID",
+            "params": [
+              {
+                "name": "lastFormID",
+                "value": "",
+                "type": "path",
+                "description": "Last form ID already retrieved; start at 0."
+              }
+            ]
+          },
+          "docs": "Returns up to 50 completed forms with an ID greater than lastFormID. Start with 0 and page using MetaCollectionResult.LastID until TotalCount is 0. A matrix variant returns matrix-style form answers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

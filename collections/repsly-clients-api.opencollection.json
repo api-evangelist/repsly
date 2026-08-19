@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Repsly Web Clients API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export clients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/clients/:lastTimestamp",
+            "params": [
+              {
+                "name": "lastTimestamp",
+                "value": "",
+                "type": "path",
+                "description": "Timestamp cursor. Start at 0 for a full export, then pass the returned MetaCollectionResult.LastTimeStamp on each subsequent call."
+              }
+            ]
+          },
+          "docs": "Returns up to 50 clients changed since the given timestamp. Start with lastTimestamp = 0 to get the full list, then pass the returned MetaCollectionResult.LastTimeStamp until TotalCount is 0."
+        },
+        {
+          "info": {
+            "name": "Export client notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/clientnotes/:lastClientNoteID",
+            "params": [
+              {
+                "name": "lastClientNoteID",
+                "value": "",
+                "type": "path",
+                "description": "Last client note ID already retrieved; start at 0."
+              }
+            ]
+          },
+          "docs": "Returns up to 50 client notes with an ID greater than lastClientNoteID. Start with 0 and page using MetaCollectionResult.LastID until TotalCount is 0."
+        },
+        {
+          "info": {
+            "name": "Import clients",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.repsly.com/v3/import/client",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Insert or update one or more clients. Repsly decides per record whether to insert or update. Returns an ImportResult with an importJobID that can be polled via /export/importStatus/{importJobID}."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

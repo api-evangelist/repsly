@@ -1,0 +1,484 @@
+{
+  "item": [
+    {
+      "id": "0cec740b-f082-4220-821a-eaf3d9516786",
+      "name": "Clients",
+      "description": {
+        "content": "Export and import clients and client notes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "888b7565-aff6-4587-8022-9f3e4ec8dfa0",
+          "name": "Export clients",
+          "request": {
+            "name": "Export clients",
+            "description": {
+              "content": "Returns up to 50 clients changed since the given timestamp. Start with lastTimestamp = 0 to get the full list, then pass the returned MetaCollectionResult.LastTimeStamp until TotalCount is 0.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "export",
+                "clients",
+                ":lastTimestamp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "lastTimestamp",
+                  "description": "(Required) Timestamp cursor. Start at 0 for a full export, then pass the returned MetaCollectionResult.LastTimeStamp on each subsequent call."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d42d0361-2645-4cb2-8bc2-641e83850ef1",
+              "name": "A batch of clients with collection metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "clients",
+                    ":lastTimestamp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "lastTimestamp",
+                      "description": "(Required) Timestamp cursor. Start at 0 for a full export, then pass the returned MetaCollectionResult.LastTimeStamp on each subsequent call."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MetaCollectionResult\": {\n    \"TotalCount\": 5961,\n    \"LastTimeStamp\": 1911,\n    \"FirstID\": 381,\n    \"LastID\": 2129\n  },\n  \"Clients\": [\n    {\n      \"ClientID\": 6735,\n      \"Code\": \"string\",\n      \"Name\": \"string\",\n      \"Active\": false,\n      \"Address1\": \"string\",\n      \"City\": \"string\",\n      \"Country\": \"string\",\n      \"Email\": \"string\",\n      \"Phone\": \"string\"\n    },\n    {\n      \"ClientID\": 5000,\n      \"Code\": \"string\",\n      \"Name\": \"string\",\n      \"Active\": true,\n      \"Address1\": \"string\",\n      \"City\": \"string\",\n      \"Country\": \"string\",\n      \"Email\": \"string\",\n      \"Phone\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98e0f29e-7b43-4514-ada0-02d19c5b5e82",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "clients",
+                    ":lastTimestamp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "lastTimestamp",
+                      "description": "(Required) Timestamp cursor. Start at 0 for a full export, then pass the returned MetaCollectionResult.LastTimeStamp on each subsequent call."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37ab964b-5631-487e-b64f-c87dbd18dbfc",
+          "name": "Export client notes",
+          "request": {
+            "name": "Export client notes",
+            "description": {
+              "content": "Returns up to 50 client notes with an ID greater than lastClientNoteID. Start with 0 and page using MetaCollectionResult.LastID until TotalCount is 0.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "export",
+                "clientnotes",
+                ":lastClientNoteID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "lastClientNoteID",
+                  "description": "(Required) Last client note ID already retrieved; start at 0."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7a6474c-171d-47d5-88f7-44b483894673",
+              "name": "A batch of client notes with collection metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "clientnotes",
+                    ":lastClientNoteID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "lastClientNoteID",
+                      "description": "(Required) Last client note ID already retrieved; start at 0."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MetaCollectionResult\": {\n    \"TotalCount\": 3757,\n    \"LastTimeStamp\": 2303,\n    \"FirstID\": 5788,\n    \"LastID\": 9228\n  },\n  \"Data\": [\n    {\n      \"key_0\": 1633.1204961190083\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aaf47b68-12e4-4a61-ba5b-6740142443d2",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "clientnotes",
+                    ":lastClientNoteID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "lastClientNoteID",
+                      "description": "(Required) Last client note ID already retrieved; start at 0."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c655165-4b6b-4861-81d9-1048d11c9e7f",
+          "name": "Import clients",
+          "request": {
+            "name": "Import clients",
+            "description": {
+              "content": "Insert or update one or more clients. Repsly decides per record whether to insert or update. Returns an ImportResult with an importJobID that can be polled via /export/importStatus/{importJobID}.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "import",
+                "client"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a9b4d81a-59c6-4e9f-9fa1-5f856a745141",
+              "name": "The import was accepted; the result includes an importJobID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import",
+                    "client"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"importJobID\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "488b2963-7ac9-4c49-b117-e39243b54857",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import",
+                    "client"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.repsly.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fae44933-e1a2-479f-8e49-81ca5c574cbd",
+    "name": "Repsly Web Clients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Repsly Web API (v3) is a REST interface for exchanging data with the Repsly retail execution and field sales platform. It is designed for ERP/CRM integration: import (POST) moves clients and products into Repsly, and export (GET) pulls clients, client notes, visits, retail audits, purchase orders, document types, products, pricelists, forms, photos, daily working time, visit schedules, and representatives back out. All requests use HTTP Basic authentication (API credentials from the Repsly settings page, NOT the login username/password) over SSL, and accept or return JSON or XML. Export endpoints return a maximum of 50 records per call; clients iterate using a timestamp or last-ID cursor and stop when the response MetaCollectionResult.TotalCount is 0.\nEndpoint paths and verbs for the export/import surface are grounded in Repsly's published v3 developer documentation. Request/response schemas below are modeled generically (the docs describe fields per entity but do not publish a machine-readable OpenAPI); treat property-level detail as modeled and confirm exact field names against the live reference at https://api.repsly.com/v3/help.\n\nContact Support:\n Name: Repsly",
+      "type": "text/plain"
+    }
+  }
+}

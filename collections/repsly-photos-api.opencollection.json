@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Repsly Web Clients Photos API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Photos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export photos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/photos/:lastPhotoID",
+            "params": [
+              {
+                "name": "lastPhotoID",
+                "value": "",
+                "type": "path",
+                "description": "Last photo ID already retrieved; start at 0."
+              }
+            ]
+          },
+          "docs": "Returns up to 50 photos with an ID greater than lastPhotoID, including metadata and image URLs. Start with 0 and page using MetaCollectionResult.LastID until TotalCount is 0."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

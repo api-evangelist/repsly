@@ -1,0 +1,721 @@
+{
+  "item": [
+    {
+      "id": "5b2c79e0-2239-44e1-82de-664335ce1f11",
+      "name": "Products",
+      "description": {
+        "content": "Export and import products, product lists, packages, and document types.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c81c7060-0088-480b-b800-39123ae18599",
+          "name": "Export products",
+          "request": {
+            "name": "Export products",
+            "description": {
+              "content": "Returns products from the catalog. Resource and path grounded in Repsly's v3 reference; the timestamp cursor form is modeled after the other export endpoints - confirm against the live reference.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "export",
+                "products",
+                ":lastTimestamp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "lastTimestamp",
+                  "description": "(Required) Timestamp cursor. Start at 0 for a full export, then pass the returned MetaCollectionResult.LastTimeStamp on each subsequent call."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1d197f6-1af5-4ca9-bfda-e490914eacfa",
+              "name": "A batch of products.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "products",
+                    ":lastTimestamp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "lastTimestamp",
+                      "description": "(Required) Timestamp cursor. Start at 0 for a full export, then pass the returned MetaCollectionResult.LastTimeStamp on each subsequent call."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MetaCollectionResult\": {\n    \"TotalCount\": 6968,\n    \"LastTimeStamp\": 3576,\n    \"FirstID\": 866,\n    \"LastID\": 830\n  },\n  \"Data\": [\n    {\n      \"key_0\": true,\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": 2949.4403921896005,\n      \"key_4\": 9579.796456915627\n    },\n    {\n      \"key_0\": 2260.2175265273063\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbdd79df-7a63-4ba5-b3bd-0d7b9c14b01a",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "products",
+                    ":lastTimestamp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "lastTimestamp",
+                      "description": "(Required) Timestamp cursor. Start at 0 for a full export, then pass the returned MetaCollectionResult.LastTimeStamp on each subsequent call."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4dd151f3-c23a-4640-ba6d-10fe56c0b7d1",
+          "name": "Export product lists",
+          "request": {
+            "name": "Export product lists",
+            "description": {
+              "content": "Returns product lists (groupings of products). Path grounded in Repsly's v3 reference.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "export",
+                "product-lists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45029559-68ea-4aec-ae01-f66d12e5709f",
+              "name": "A collection of product lists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "product-lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MetaCollectionResult\": {\n    \"TotalCount\": 4239,\n    \"LastTimeStamp\": 806,\n    \"FirstID\": 5208,\n    \"LastID\": 3326\n  },\n  \"Data\": [\n    {\n      \"key_0\": true,\n      \"key_1\": 6617.408940688629\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cc6d495-36c7-4674-ae59-6c95f33eca7b",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "product-lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d79b5bba-f2fb-4fb2-a8c9-0114ee25f3e8",
+          "name": "Export document types",
+          "request": {
+            "name": "Export document types",
+            "description": {
+              "content": "Returns the document types configured on the account (used to classify sales documents and purchase orders).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "export",
+                "documentTypes",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb0c1df0-02f3-4c42-84aa-36ec7dab0839",
+              "name": "A collection of document types.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "documentTypes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MetaCollectionResult\": {\n    \"TotalCount\": 4239,\n    \"LastTimeStamp\": 806,\n    \"FirstID\": 5208,\n    \"LastID\": 3326\n  },\n  \"Data\": [\n    {\n      \"key_0\": true,\n      \"key_1\": 6617.408940688629\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02f23dea-6746-4f5a-bfde-5006f14557b7",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "documentTypes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb00ad18-f58b-45ea-bdfc-b08caa306bfc",
+          "name": "Import products",
+          "request": {
+            "name": "Import products",
+            "description": {
+              "content": "Insert or update products in the catalog. Returns an importJobID for status polling.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "import",
+                "product"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c7a1ca7d-d701-48da-9a3b-d514b0aafe46",
+              "name": "The import was accepted; the result includes an importJobID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import",
+                    "product"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"importJobID\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e836be4f-9c98-4915-80b0-9a982c837c61",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import",
+                    "product"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3209697e-9f0b-49c7-a95f-005e32635ae2",
+          "name": "Import product packages",
+          "request": {
+            "name": "Import product packages",
+            "description": {
+              "content": "Insert or update product packaging definitions. Returns an importJobID for status polling.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "import",
+                "package"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d8a71b8a-69c8-4759-829c-ea36b8c0888c",
+              "name": "The import was accepted; the result includes an importJobID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import",
+                    "package"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"importJobID\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "510e5b63-78a1-4998-b127-0aa63fcb7f60",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import",
+                    "package"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.repsly.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "81b0d292-e341-45fb-8e37-a9c64b7bdf24",
+    "name": "Repsly Web Clients Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Repsly Web API (v3) is a REST interface for exchanging data with the Repsly retail execution and field sales platform. It is designed for ERP/CRM integration: import (POST) moves clients and products into Repsly, and export (GET) pulls clients, client notes, visits, retail audits, purchase orders, document types, products, pricelists, forms, photos, daily working time, visit schedules, and representatives back out. All requests use HTTP Basic authentication (API credentials from the Repsly settings page, NOT the login username/password) over SSL, and accept or return JSON or XML. Export endpoints return a maximum of 50 records per call; clients iterate using a timestamp or last-ID cursor and stop when the response MetaCollectionResult.TotalCount is 0.\nEndpoint paths and verbs for the export/import surface are grounded in Repsly's published v3 developer documentation. Request/response schemas below are modeled generically (the docs describe fields per entity but do not publish a machine-readable OpenAPI); treat property-level detail as modeled and confirm exact field names against the live reference at https://api.repsly.com/v3/help.\n\nContact Support:\n Name: Repsly",
+      "type": "text/plain"
+    }
+  }
+}

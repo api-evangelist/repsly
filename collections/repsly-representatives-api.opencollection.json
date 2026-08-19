@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Repsly Web Clients Representatives API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Representatives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export representatives",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/representatives"
+          },
+          "docs": "Returns all field representatives on the account, including their territories, roles, and active status."
+        },
+        {
+          "info": {
+            "name": "Export users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/users"
+          },
+          "docs": "Returns the account's users. Path grounded in Repsly's v3 reference; pagination/cursor parameters are modeled - confirm against the live reference."
+        },
+        {
+          "info": {
+            "name": "Export daily working time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/dailyworkingtime/:lastDailyWorkingTimeID",
+            "params": [
+              {
+                "name": "lastDailyWorkingTimeID",
+                "value": "",
+                "type": "path",
+                "description": "Last daily working time ID already retrieved; start at 0."
+              }
+            ]
+          },
+          "docs": "Returns up to 50 daily working time records with an ID greater than lastDailyWorkingTimeID. Page using MetaCollectionResult.LastID until TotalCount is 0."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

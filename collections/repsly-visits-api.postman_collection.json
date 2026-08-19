@@ -1,0 +1,632 @@
+{
+  "item": [
+    {
+      "id": "2f8f5669-bec2-4ec0-9fe2-212e8df3606b",
+      "name": "Visits",
+      "description": {
+        "content": "Export visits, visit schedules, and realizations; import schedules.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cbf29659-28bf-4f65-a3bf-2c5d165a6335",
+          "name": "Export visits",
+          "request": {
+            "name": "Export visits",
+            "description": {
+              "content": "Returns up to 50 visits changed since the given timestamp. Start with 0 and page using MetaCollectionResult.LastTimeStamp until TotalCount is 0.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "export",
+                "visits",
+                ":lastTimestamp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "lastTimestamp",
+                  "description": "(Required) Timestamp cursor. Start at 0 for a full export, then pass the returned MetaCollectionResult.LastTimeStamp on each subsequent call."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3cedd51-932e-4df2-8970-aac1f3bee7a1",
+              "name": "A batch of visits with collection metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "visits",
+                    ":lastTimestamp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "lastTimestamp",
+                      "description": "(Required) Timestamp cursor. Start at 0 for a full export, then pass the returned MetaCollectionResult.LastTimeStamp on each subsequent call."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MetaCollectionResult\": {\n    \"TotalCount\": 311,\n    \"LastTimeStamp\": 5291,\n    \"FirstID\": 9477,\n    \"LastID\": 6876\n  },\n  \"Data\": [\n    {\n      \"key_0\": false\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": 1414.19933253767\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d6b4132-5c33-4ab8-acef-fb7ab0b45508",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "visits",
+                    ":lastTimestamp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "lastTimestamp",
+                      "description": "(Required) Timestamp cursor. Start at 0 for a full export, then pass the returned MetaCollectionResult.LastTimeStamp on each subsequent call."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68970aba-bfc9-4d0a-89ce-3b937dad14d4",
+          "name": "Export visit schedules",
+          "request": {
+            "name": "Export visit schedules",
+            "description": {
+              "content": "Returns planned visit schedules between beginDateTime and endDateTime (inclusive), for all representatives.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "export",
+                "visitschedules",
+                ":beginDateTime",
+                ":endDateTime"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "beginDateTime",
+                  "description": "(Required) Start of the date range (e.g. 2026-07-01)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "endDateTime",
+                  "description": "(Required) End of the date range (e.g. 2026-07-31)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52aec385-6657-4d2e-843e-a7d216b7f77d",
+              "name": "A collection of visit schedules.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "visitschedules",
+                    ":beginDateTime",
+                    ":endDateTime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "beginDateTime",
+                      "description": "(Required) Start of the date range (e.g. 2026-07-01)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endDateTime",
+                      "description": "(Required) End of the date range (e.g. 2026-07-31)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MetaCollectionResult\": {\n    \"TotalCount\": 1350,\n    \"LastTimeStamp\": 9311,\n    \"FirstID\": 6971,\n    \"LastID\": 2005\n  },\n  \"Data\": [\n    {\n      \"key_0\": 9533.656977543273\n    },\n    {\n      \"key_0\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "758051e2-eada-4346-ae93-b7508c938c29",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "visitschedules",
+                    ":beginDateTime",
+                    ":endDateTime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "beginDateTime",
+                      "description": "(Required) Start of the date range (e.g. 2026-07-01)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endDateTime",
+                      "description": "(Required) End of the date range (e.g. 2026-07-31)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "288c54de-d77d-4677-a28f-e587595b3fc6",
+          "name": "Export visit schedule realizations",
+          "request": {
+            "name": "Export visit schedule realizations",
+            "description": {
+              "content": "Returns visit schedule realizations - how planned schedules were actually executed. Path grounded in Repsly's v3 reference; cursor parameters are modeled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "export",
+                "visit-realizations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "baaf00b4-cf80-4a8f-9681-94df1c5edd7e",
+              "name": "A collection of visit realizations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "visit-realizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MetaCollectionResult\": {\n    \"TotalCount\": 1350,\n    \"LastTimeStamp\": 9311,\n    \"FirstID\": 6971,\n    \"LastID\": 2005\n  },\n  \"Data\": [\n    {\n      \"key_0\": 9533.656977543273\n    },\n    {\n      \"key_0\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dc354ad-3bfc-4612-94a9-9a412bd2bf74",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "visit-realizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0688a9f9-dad3-42f9-a127-3b038f8320f9",
+          "name": "Import visit schedules",
+          "request": {
+            "name": "Import visit schedules",
+            "description": {
+              "content": "Insert or update visit schedules to plan representatives' routes. Returns an importJobID for status polling.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "import",
+                "schedule"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 6629.699012630098\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ac9a83d-0822-46f8-a677-21630b533572",
+              "name": "The import was accepted; the result includes an importJobID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import",
+                    "schedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"importJobID\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fbb4c25-d855-4fc2-8817-fa36c7d12fdc",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import",
+                    "schedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.repsly.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2cf67b96-a04c-409b-b5d2-413b1a6222d0",
+    "name": "Repsly Web Clients Visits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Repsly Web API (v3) is a REST interface for exchanging data with the Repsly retail execution and field sales platform. It is designed for ERP/CRM integration: import (POST) moves clients and products into Repsly, and export (GET) pulls clients, client notes, visits, retail audits, purchase orders, document types, products, pricelists, forms, photos, daily working time, visit schedules, and representatives back out. All requests use HTTP Basic authentication (API credentials from the Repsly settings page, NOT the login username/password) over SSL, and accept or return JSON or XML. Export endpoints return a maximum of 50 records per call; clients iterate using a timestamp or last-ID cursor and stop when the response MetaCollectionResult.TotalCount is 0.\nEndpoint paths and verbs for the export/import surface are grounded in Repsly's published v3 developer documentation. Request/response schemas below are modeled generically (the docs describe fields per entity but do not publish a machine-readable OpenAPI); treat property-level detail as modeled and confirm exact field names against the live reference at https://api.repsly.com/v3/help.\n\nContact Support:\n Name: Repsly",
+      "type": "text/plain"
+    }
+  }
+}

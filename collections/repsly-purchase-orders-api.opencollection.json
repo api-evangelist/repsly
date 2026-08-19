@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Repsly Web Clients Purchase Orders API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Purchase Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export purchase orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/purchaseorders/:lastDocumentID",
+            "params": [
+              {
+                "name": "lastDocumentID",
+                "value": "",
+                "type": "path",
+                "description": "Last document ID already retrieved; start at 0."
+              }
+            ]
+          },
+          "docs": "Returns up to 50 purchase orders with a document ID greater than lastDocumentID. Start with 0 and page using MetaCollectionResult.LastID until TotalCount is 0."
+        },
+        {
+          "info": {
+            "name": "Update sales document status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.repsly.com/v3/import/sales-document-status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Post a status update back to a sales document (e.g. a purchase order) after it is processed in the back office. Path grounded in Repsly's v3 reference; body fields are modeled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

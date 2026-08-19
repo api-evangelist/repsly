@@ -1,0 +1,333 @@
+{
+  "item": [
+    {
+      "id": "6cd5730d-d2a1-481b-8fc0-1de3c9d108bf",
+      "name": "Purchase Orders",
+      "description": {
+        "content": "Export purchase orders and update sales document status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f6e16c49-6a65-4fd9-81a5-717efb3a20fb",
+          "name": "Export purchase orders",
+          "request": {
+            "name": "Export purchase orders",
+            "description": {
+              "content": "Returns up to 50 purchase orders with a document ID greater than lastDocumentID. Start with 0 and page using MetaCollectionResult.LastID until TotalCount is 0.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "export",
+                "purchaseorders",
+                ":lastDocumentID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "lastDocumentID",
+                  "description": "(Required) Last document ID already retrieved; start at 0."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f22324ab-52c9-49f5-b7cf-64b8654e5db0",
+              "name": "A batch of purchase orders with collection metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "purchaseorders",
+                    ":lastDocumentID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "lastDocumentID",
+                      "description": "(Required) Last document ID already retrieved; start at 0."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MetaCollectionResult\": {\n    \"TotalCount\": 7326,\n    \"LastTimeStamp\": 9286,\n    \"FirstID\": 5144,\n    \"LastID\": 1703\n  },\n  \"Data\": [\n    {\n      \"key_0\": \"string\"\n    },\n    {\n      \"key_0\": 1510,\n      \"key_1\": 1437\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abb1c806-cfcc-4588-a06c-9e2d6003785f",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "purchaseorders",
+                    ":lastDocumentID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "lastDocumentID",
+                      "description": "(Required) Last document ID already retrieved; start at 0."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ab47475-f9ca-4f2d-b83a-1757ad708a94",
+          "name": "Update sales document status",
+          "request": {
+            "name": "Update sales document status",
+            "description": {
+              "content": "Post a status update back to a sales document (e.g. a purchase order) after it is processed in the back office. Path grounded in Repsly's v3 reference; body fields are modeled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "import",
+                "sales-document-status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": false,\n  \"key_1\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f1f67883-b95c-4611-98ad-5bb5fed0a6e8",
+              "name": "The import was accepted; the result includes an importJobID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import",
+                    "sales-document-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"importJobID\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0ab84a9-6373-4eef-912e-1d268c397b83",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import",
+                    "sales-document-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.repsly.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2adc91bb-064c-4ba4-bc9e-289817e62f0e",
+    "name": "Repsly Web Clients Purchase Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Repsly Web API (v3) is a REST interface for exchanging data with the Repsly retail execution and field sales platform. It is designed for ERP/CRM integration: import (POST) moves clients and products into Repsly, and export (GET) pulls clients, client notes, visits, retail audits, purchase orders, document types, products, pricelists, forms, photos, daily working time, visit schedules, and representatives back out. All requests use HTTP Basic authentication (API credentials from the Repsly settings page, NOT the login username/password) over SSL, and accept or return JSON or XML. Export endpoints return a maximum of 50 records per call; clients iterate using a timestamp or last-ID cursor and stop when the response MetaCollectionResult.TotalCount is 0.\nEndpoint paths and verbs for the export/import surface are grounded in Repsly's published v3 developer documentation. Request/response schemas below are modeled generically (the docs describe fields per entity but do not publish a machine-readable OpenAPI); treat property-level detail as modeled and confirm exact field names against the live reference at https://api.repsly.com/v3/help.\n\nContact Support:\n Name: Repsly",
+      "type": "text/plain"
+    }
+  }
+}

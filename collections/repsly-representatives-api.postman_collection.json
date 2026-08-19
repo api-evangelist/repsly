@@ -1,0 +1,444 @@
+{
+  "item": [
+    {
+      "id": "fa2b1d12-7237-4d99-af27-b2338d7ccdf0",
+      "name": "Representatives",
+      "description": {
+        "content": "Export representatives, users, and daily working time.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ddb08ea-a872-48bd-b438-8ffab2cc6b3c",
+          "name": "Export representatives",
+          "request": {
+            "name": "Export representatives",
+            "description": {
+              "content": "Returns all field representatives on the account, including their territories, roles, and active status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "export",
+                "representatives"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a89431cb-202d-4646-9f6c-c632ccafb679",
+              "name": "A collection of representatives.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "representatives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MetaCollectionResult\": {\n    \"TotalCount\": 7129,\n    \"LastTimeStamp\": 5690,\n    \"FirstID\": 9859,\n    \"LastID\": 4151\n  },\n  \"Data\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 7032\n    },\n    {\n      \"key_0\": 5740\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bac00aa0-b581-435a-9247-2c935cc59922",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "representatives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9fb77e7b-b79e-418d-8100-3298842cf7bc",
+          "name": "Export users",
+          "request": {
+            "name": "Export users",
+            "description": {
+              "content": "Returns the account's users. Path grounded in Repsly's v3 reference; pagination/cursor parameters are modeled - confirm against the live reference.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "export",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a9f6ad3-548e-4607-8126-5cca02d1438e",
+              "name": "A collection of users.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MetaCollectionResult\": {\n    \"TotalCount\": 4230,\n    \"LastTimeStamp\": 3240,\n    \"FirstID\": 2977,\n    \"LastID\": 5511\n  },\n  \"Data\": [\n    {\n      \"key_0\": true,\n      \"key_1\": \"string\"\n    },\n    {\n      \"key_0\": 8464\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6a06d86-8817-4a81-b12a-5daa09a8ccbf",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0af461d-8716-4368-aa41-1cb768d07df6",
+          "name": "Export daily working time",
+          "request": {
+            "name": "Export daily working time",
+            "description": {
+              "content": "Returns up to 50 daily working time records with an ID greater than lastDailyWorkingTimeID. Page using MetaCollectionResult.LastID until TotalCount is 0.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "export",
+                "dailyworkingtime",
+                ":lastDailyWorkingTimeID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "lastDailyWorkingTimeID",
+                  "description": "(Required) Last daily working time ID already retrieved; start at 0."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ca23b81-97cc-4c10-911b-63b183381e54",
+              "name": "A batch of daily working time records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "dailyworkingtime",
+                    ":lastDailyWorkingTimeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "lastDailyWorkingTimeID",
+                      "description": "(Required) Last daily working time ID already retrieved; start at 0."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MetaCollectionResult\": {\n    \"TotalCount\": 4230,\n    \"LastTimeStamp\": 3240,\n    \"FirstID\": 2977,\n    \"LastID\": 5511\n  },\n  \"Data\": [\n    {\n      \"key_0\": true,\n      \"key_1\": \"string\"\n    },\n    {\n      \"key_0\": 8464\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2435ddc-10a2-45aa-9a69-7e948759a823",
+              "name": "Missing or invalid Basic authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "export",
+                    "dailyworkingtime",
+                    ":lastDailyWorkingTimeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "lastDailyWorkingTimeID",
+                      "description": "(Required) Last daily working time ID already retrieved; start at 0."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.repsly.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a87762f2-3c3f-4bbb-9d99-5b1540f6522a",
+    "name": "Repsly Web Clients Representatives API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Repsly Web API (v3) is a REST interface for exchanging data with the Repsly retail execution and field sales platform. It is designed for ERP/CRM integration: import (POST) moves clients and products into Repsly, and export (GET) pulls clients, client notes, visits, retail audits, purchase orders, document types, products, pricelists, forms, photos, daily working time, visit schedules, and representatives back out. All requests use HTTP Basic authentication (API credentials from the Repsly settings page, NOT the login username/password) over SSL, and accept or return JSON or XML. Export endpoints return a maximum of 50 records per call; clients iterate using a timestamp or last-ID cursor and stop when the response MetaCollectionResult.TotalCount is 0.\nEndpoint paths and verbs for the export/import surface are grounded in Repsly's published v3 developer documentation. Request/response schemas below are modeled generically (the docs describe fields per entity but do not publish a machine-readable OpenAPI); treat property-level detail as modeled and confirm exact field names against the live reference at https://api.repsly.com/v3/help.\n\nContact Support:\n Name: Repsly",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Repsly Web Clients Visits API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Visits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export visits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/visits/:lastTimestamp",
+            "params": [
+              {
+                "name": "lastTimestamp",
+                "value": "",
+                "type": "path",
+                "description": "Timestamp cursor. Start at 0 for a full export, then pass the returned MetaCollectionResult.LastTimeStamp on each subsequent call."
+              }
+            ]
+          },
+          "docs": "Returns up to 50 visits changed since the given timestamp. Start with 0 and page using MetaCollectionResult.LastTimeStamp until TotalCount is 0."
+        },
+        {
+          "info": {
+            "name": "Export visit schedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/visitschedules/:beginDateTime/:endDateTime",
+            "params": [
+              {
+                "name": "beginDateTime",
+                "value": "",
+                "type": "path",
+                "description": "Start of the date range (e.g. 2026-07-01)."
+              },
+              {
+                "name": "endDateTime",
+                "value": "",
+                "type": "path",
+                "description": "End of the date range (e.g. 2026-07-31)."
+              }
+            ]
+          },
+          "docs": "Returns planned visit schedules between beginDateTime and endDateTime (inclusive), for all representatives."
+        },
+        {
+          "info": {
+            "name": "Export visit schedule realizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/visit-realizations"
+          },
+          "docs": "Returns visit schedule realizations - how planned schedules were actually executed. Path grounded in Repsly's v3 reference; cursor parameters are modeled."
+        },
+        {
+          "info": {
+            "name": "Import visit schedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.repsly.com/v3/import/schedule",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Insert or update visit schedules to plan representatives' routes. Returns an importJobID for status polling."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

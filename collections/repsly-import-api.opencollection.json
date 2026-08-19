@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Repsly Web Clients Import API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Import",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get import job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/importStatus/:importJobID",
+            "params": [
+              {
+                "name": "importJobID",
+                "value": "",
+                "type": "path",
+                "description": "The import job ID returned by an import call."
+              }
+            ]
+          },
+          "docs": "Returns the status of a previously submitted import job, identified by the importJobID returned from an import (POST) call."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

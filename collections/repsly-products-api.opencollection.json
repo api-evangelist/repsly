@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Repsly Web Clients Products API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/products/:lastTimestamp",
+            "params": [
+              {
+                "name": "lastTimestamp",
+                "value": "",
+                "type": "path",
+                "description": "Timestamp cursor. Start at 0 for a full export, then pass the returned MetaCollectionResult.LastTimeStamp on each subsequent call."
+              }
+            ]
+          },
+          "docs": "Returns products from the catalog. Resource and path grounded in Repsly's v3 reference; the timestamp cursor form is modeled after the other export endpoints - confirm against the live reference."
+        },
+        {
+          "info": {
+            "name": "Export product lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/product-lists"
+          },
+          "docs": "Returns product lists (groupings of products). Path grounded in Repsly's v3 reference."
+        },
+        {
+          "info": {
+            "name": "Export document types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/documentTypes/"
+          },
+          "docs": "Returns the document types configured on the account (used to classify sales documents and purchase orders)."
+        },
+        {
+          "info": {
+            "name": "Import products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.repsly.com/v3/import/product",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Insert or update products in the catalog. Returns an importJobID for status polling."
+        },
+        {
+          "info": {
+            "name": "Import product packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.repsly.com/v3/import/package",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Insert or update product packaging definitions. Returns an importJobID for status polling."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

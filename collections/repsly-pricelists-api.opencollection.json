@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Repsly Web Clients Pricelists API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pricelists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export pricelists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/pricelists/"
+          },
+          "docs": "Returns the list of pricelists configured on the account."
+        },
+        {
+          "info": {
+            "name": "Export pricelist items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.repsly.com/v3/export/pricelists/:pricelistID",
+            "params": [
+              {
+                "name": "pricelistID",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the pricelist whose items to export."
+              }
+            ]
+          },
+          "docs": "Returns the items (products and prices) within a specific pricelist."
+        },
+        {
+          "info": {
+            "name": "Import pricelists",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.repsly.com/v3/import/pricelist",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Insert or update pricelists and their items. Returns an importJobID for status polling."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
