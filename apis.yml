@@ -128,7 +128,7 @@ apis:
   humanURL: https://repsly-dev.readme.io/reference/getting-started-1
   baseURL: https://api.repsly.com/v3
   tags:
-  - Price Lists
+  - Pricelists
   tags_raw:
   - Pricelists
   properties:
