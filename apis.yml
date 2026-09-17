@@ -123,26 +123,6 @@ apis:
     url: collections/repsly.postman_collection.json
   - type: OpenCollection
     url: collections/repsly.opencollection.json
-- aid: repsly:repsly-pricelists-api
-  name: Repsly Pricelists API
-  description: Export and import pricelists and pricelist items.
-  humanURL: https://repsly-dev.readme.io/reference/getting-started-1
-  baseURL: https://api.repsly.com/v3
-  tags:
-  - Price Lists
-  tags_raw:
-  - Pricelists
-  properties:
-  - type: OpenAPI
-    url: openapi/repsly-pricelists-api-openapi.yml
-  - type: Documentation
-    url: https://repsly-dev.readme.io/reference/getting-started-1
-  - type: APIReference
-    url: https://knowledge.repsly.com/hc/en-us/sections/4408918344723-API-documentation
-  - type: PostmanCollection
-    url: collections/repsly.postman_collection.json
-  - type: OpenCollection
-    url: collections/repsly.opencollection.json
 - aid: repsly:repsly-products-api
   name: Repsly Products API
   description: Export and import products, product lists, packages, and document types.
@@ -209,6 +189,24 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/repsly-visits-api-openapi.yml
+  - type: Documentation
+    url: https://repsly-dev.readme.io/reference/getting-started-1
+  - type: APIReference
+    url: https://knowledge.repsly.com/hc/en-us/sections/4408918344723-API-documentation
+  - type: PostmanCollection
+    url: collections/repsly.postman_collection.json
+  - type: OpenCollection
+    url: collections/repsly.opencollection.json
+- aid: repsly:repsly-price-lists-api
+  name: Repsly Price Lists API
+  description: Export and import pricelists and pricelist items.
+  humanURL: https://repsly-dev.readme.io/reference/getting-started-1
+  baseURL: https://api.repsly.com/v3
+  tags:
+  - Price Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/repsly-price-lists-api-openapi.yml
   - type: Documentation
     url: https://repsly-dev.readme.io/reference/getting-started-1
   - type: APIReference
