@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Repsly Web Clients Pricelists API
-  description: 'The Repsly Web API (v3) is a REST interface for exchanging data with the Repsly retail execution and field sales platform. It is designed for ERP/CRM integration: import (POST) moves clients and products into Repsly, and export (GET) pulls clients, client notes, visits, retail audits, purchase orders, document types, products, pricelists, forms, photos, daily working time, visit schedules, and representatives back out. All requests use HTTP Basic authentication (API credentials from the Repsly settings page, NOT the login username/password) over SSL, and accept or return JSON or XML. Export endpoints return a maximum of 50 records per call; clients iterate using a timestamp or last-ID cursor and stop when the response MetaCollectionResult.TotalCount is 0.
-
-    Endpoint paths and verbs for the export/import surface are grounded in Repsly''s published v3 developer documentation. Request/response schemas below are modeled generically (the docs describe fields per entity but do not publish a machine-readable OpenAPI); treat property-level detail as modeled and confirm exact field names against the live reference at https://api.repsly.com/v3/help.'
+  title: Repsly Web Pricelists API
+  description: The Repsly Web API (v3) is a REST interface for exchanging data with the Repsly retail execution and field sales platform.
   version: '3.0'
   contact:
     name: Repsly
@@ -14,14 +12,14 @@ servers:
 security:
 - basicAuth: []
 tags:
-- name: Pricelists
+- name: Price Lists
   description: Export and import pricelists and pricelist items.
 paths:
   /export/pricelists/:
     get:
       operationId: exportPricelists
       tags:
-      - Pricelists
+      - Price Lists
       summary: Export pricelists
       description: Returns the list of pricelists configured on the account.
       responses:
@@ -37,7 +35,7 @@ paths:
     get:
       operationId: exportPricelistItems
       tags:
-      - Pricelists
+      - Price Lists
       summary: Export pricelist items
       description: Returns the items (products and prices) within a specific pricelist.
       parameters:
@@ -61,7 +59,7 @@ paths:
     post:
       operationId: importPricelists
       tags:
-      - Pricelists
+      - Price Lists
       summary: Import pricelists
       description: Insert or update pricelists and their items. Returns an importJobID for status polling.
       requestBody:
@@ -72,15 +70,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  requestBodies:
-    ImportBody:
-      required: true
-      description: A batch of entities to insert or update. Repsly decides per record whether to insert or update. Accepts JSON or XML; field schema depends on the entity being imported.
-      content:
-        application/json:
-          schema:
-            type: object
-            additionalProperties: true
   schemas:
     GenericCollection:
       type: object
@@ -99,14 +88,6 @@ components:
         code:
           type: string
         message:
-          type: string
-    ImportResult:
-      type: object
-      description: Result of an import (POST) call, including the job identifier.
-      properties:
-        importJobID:
-          type: string
-        status:
           type: string
     MetaCollectionResult:
       type: object
@@ -127,19 +108,36 @@ components:
           type: integer
           format: int64
           description: Unique ID of the last item in the list (ID-paged endpoints).
+    ImportResult:
+      type: object
+      description: Result of an import (POST) call, including the job identifier.
+      properties:
+        importJobID:
+          type: string
+        status:
+          type: string
   responses:
-    Unauthorized:
-      description: Missing or invalid Basic authentication credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     ImportAccepted:
       description: The import was accepted; the result includes an importJobID.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ImportResult'
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  requestBodies:
+    ImportBody:
+      required: true
+      description: A batch of entities to insert or update. Repsly decides per record whether to insert or update. Accepts JSON or XML; field schema depends on the entity being imported.
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
   securitySchemes:
     basicAuth:
       type: http

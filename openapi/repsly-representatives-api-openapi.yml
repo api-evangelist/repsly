@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Repsly Web Clients Representatives API
-  description: 'The Repsly Web API (v3) is a REST interface for exchanging data with the Repsly retail execution and field sales platform. It is designed for ERP/CRM integration: import (POST) moves clients and products into Repsly, and export (GET) pulls clients, client notes, visits, retail audits, purchase orders, document types, products, pricelists, forms, photos, daily working time, visit schedules, and representatives back out. All requests use HTTP Basic authentication (API credentials from the Repsly settings page, NOT the login username/password) over SSL, and accept or return JSON or XML. Export endpoints return a maximum of 50 records per call; clients iterate using a timestamp or last-ID cursor and stop when the response MetaCollectionResult.TotalCount is 0.
-
-    Endpoint paths and verbs for the export/import surface are grounded in Repsly''s published v3 developer documentation. Request/response schemas below are modeled generically (the docs describe fields per entity but do not publish a machine-readable OpenAPI); treat property-level detail as modeled and confirm exact field names against the live reference at https://api.repsly.com/v3/help.'
+  title: Repsly Web Representatives API
+  description: The Repsly Web API (v3) is a REST interface for exchanging data with the Repsly retail execution and field sales platform.
   version: '3.0'
   contact:
     name: Repsly
@@ -75,17 +73,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    GenericCollection:
-      type: object
-      description: Generic export collection envelope. Each export endpoint returns an entity array plus MetaCollectionResult; entity fields are documented per resource in the Repsly reference and are modeled here.
-      properties:
-        MetaCollectionResult:
-          $ref: '#/components/schemas/MetaCollectionResult'
-        Data:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
     MetaCollectionResult:
       type: object
       description: Pagination metadata returned with export collections. Iterate until TotalCount is 0.
@@ -105,6 +92,17 @@ components:
           type: integer
           format: int64
           description: Unique ID of the last item in the list (ID-paged endpoints).
+    GenericCollection:
+      type: object
+      description: Generic export collection envelope. Each export endpoint returns an entity array plus MetaCollectionResult; entity fields are documented per resource in the Repsly reference and are modeled here.
+      properties:
+        MetaCollectionResult:
+          $ref: '#/components/schemas/MetaCollectionResult'
+        Data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
     Error:
       type: object
       properties:
