@@ -70,7 +70,27 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    ImportAccepted:
+      description: The import was accepted; the result includes an importJobID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ImportResult'
+    Unauthorized:
+      description: Missing or invalid Basic authentication credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     GenericCollection:
       type: object
       description: Generic export collection envelope. Each export endpoint returns an entity array plus MetaCollectionResult; entity fields are documented per resource in the Repsly reference and are modeled here.
@@ -82,13 +102,6 @@ components:
           items:
             type: object
             additionalProperties: true
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     MetaCollectionResult:
       type: object
       description: Pagination metadata returned with export collections. Iterate until TotalCount is 0.
@@ -116,19 +129,6 @@ components:
           type: string
         status:
           type: string
-  responses:
-    ImportAccepted:
-      description: The import was accepted; the result includes an importJobID.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ImportResult'
-    Unauthorized:
-      description: Missing or invalid Basic authentication credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   requestBodies:
     ImportBody:
       required: true
