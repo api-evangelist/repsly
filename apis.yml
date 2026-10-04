@@ -223,6 +223,9 @@ apis:
   - type: OpenCollection
     url: collections/repsly.opencollection.json
 common:
+- type: CapabilityMap
+  url: capabilities/repsly-capability-edges.yml
+  name: Repsly Business Capability Map
 - type: AgenticAccess
   url: agentic-access/repsly-agentic-access.yml
 - type: TrustCenter
