@@ -94,6 +94,15 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  requestBodies:
+    ImportBody:
+      required: true
+      description: A batch of entities to insert or update. Repsly decides per record whether to insert or update. Accepts JSON or XML; field schema depends on the entity being imported.
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
   schemas:
     GenericCollection:
       type: object
@@ -114,6 +123,13 @@ components:
           type: string
         status:
           type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     MetaCollectionResult:
       type: object
       description: Pagination metadata returned with export collections. Iterate until TotalCount is 0.
@@ -133,22 +149,6 @@ components:
           type: integer
           format: int64
           description: Unique ID of the last item in the list (ID-paged endpoints).
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-  requestBodies:
-    ImportBody:
-      required: true
-      description: A batch of entities to insert or update. Repsly decides per record whether to insert or update. Accepts JSON or XML; field schema depends on the entity being imported.
-      content:
-        application/json:
-          schema:
-            type: object
-            additionalProperties: true
   responses:
     ImportAccepted:
       description: The import was accepted; the result includes an importJobID.

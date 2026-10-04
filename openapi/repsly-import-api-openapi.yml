@@ -40,13 +40,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     ImportResult:
       type: object
       description: Result of an import (POST) call, including the job identifier.
@@ -54,6 +47,13 @@ components:
         importJobID:
           type: string
         status:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
           type: string
   responses:
     Unauthorized:
