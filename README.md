@@ -1,4 +1,4 @@
-# Repsly (repsly)
+# Repsly
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,217 +64,134 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Repsly is a retail execution and field sales platform for CPG brands and field teams - covering in-store activity, merchandising, retail audits, order taking, and territory management. The Repsly Web API (v3) is a REST interface at `https://api.repsly.com/v3` designed for ERP/CRM integration: it imports (POST) clients and products into Repsly and exports (GET) clients, visits, retail audits, forms, photos, purchase orders, pricelists, representatives, and schedules back out. Requests use HTTP Basic authentication over SSL (with API credentials from the Repsly settings page, distinct from your login), exchange JSON or XML, and paginate export results in batches of up to 50 records using timestamp or last-ID cursors until the response `MetaCollectionResult.TotalCount` reaches zero.
+Repsly is a retail execution and field sales platform for CPG brands and field teams - covering in-store activity, merchandising, retail audits, order taking, and territory management. The Repsly Web API (v3) is a REST interface at https://api.repsly.com/v3 designed for ERP/CRM integration - it moves clients and products into Repsly (import) and pulls clients, visits, retail audits, forms, photos, purchase orders, pricelists, representatives, and schedules back out (export). Requests use HTTP Basic authentication over SSL, exchange JSON or XML, and paginate export results in batches of up to 50 records using timestamp or last-ID cursors until the response MetaCollectionResult TotalCount reaches zero.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/repsly/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/repsly/refs/heads/main/apis.yml)
+**Areas:** Retail Execution · Field Sales · Merchandising · Consumer Packaged Goods · Retail Audits · Sales Force Automation
 
-## Tags
+## Repsly on APIs.io
 
-- Retail Execution
-- Field Sales
-- Merchandising
-- CPG
-- Retail Audits
-- Sales Force Automation
+Everything profiled for Repsly is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/repsly/](https://apis.io/providers/repsly/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (9)
 
-- **Created:** 2026-07-04
-- **Modified:** 2026-07-04
+- [Repsly Clients API](https://apis.io/apis/repsly/repsly-clients-api/) — Export and import clients and client notes.
+- [Repsly Forms API](https://apis.io/apis/repsly/repsly-forms-api/) — Export completed forms and retail audits.
+- [Repsly Import API](https://apis.io/apis/repsly/repsly-import-api/) — Bulk import surface and import job status.
+- [Repsly Photos API](https://apis.io/apis/repsly/repsly-photos-api/) — Export photos captured in the field.
+- [Repsly Products API](https://apis.io/apis/repsly/repsly-products-api/) — Export and import products, product lists, packages, and document types.
+- [Repsly Purchase Orders API](https://apis.io/apis/repsly/repsly-purchase-orders-api/) — Export purchase orders and update sales document status.
+- [Repsly Representatives API](https://apis.io/apis/repsly/repsly-representatives-api/) — Export representatives, users, and daily working time.
+- [Repsly Visits API](https://apis.io/apis/repsly/repsly-visits-api/) — Export visits, visit schedules, and realizations; import schedules.
+- [Repsly Price Lists API](https://apis.io/apis/repsly/repsly-price-lists-api/) — Export and import pricelists and pricelist items.
 
-## APIs
+### Published properties
 
-### Repsly Clients API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Export clients and client notes from Repsly and import (insert or update) client master data from an ERP/CRM. Client export uses a timestamp cursor; client notes use a last-note-ID cursor.
+#### Agentic access (1)
 
-- **Human URL:** [https://repsly-dev.readme.io/reference/getting-started-1](https://repsly-dev.readme.io/reference/getting-started-1)
-- **Base URL:** `https://api.repsly.com/v3`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Repsly Agentic Access](https://apis.io/agentic-access/repsly/repsly-agentic-access/)
 
-- Clients
-- Client Notes
-- CRM
+#### Collections (10)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://repsly-dev.readme.io/reference/getting-started-1)
-- [API Reference](https://knowledge.repsly.com/hc/en-us/sections/4408918344723-API-documentation)
-- [OpenAPI](openapi/repsly-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/repsly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/repsly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Repsly Web API (v3)](https://apis.io/collections/repsly/open-repsly/)
+- [Repsly Web Clients API](https://apis.io/collections/repsly/open-repsly-clients-api/)
+- [Repsly Web Clients Forms API](https://apis.io/collections/repsly/open-repsly-forms-api/)
+- [Repsly Web Clients Import API](https://apis.io/collections/repsly/open-repsly-import-api/)
+- [Repsly Web Clients Photos API](https://apis.io/collections/repsly/open-repsly-photos-api/)
+- [Repsly Web Clients Pricelists API](https://apis.io/collections/repsly/open-repsly-pricelists-api/)
+- [Repsly Web Clients Products API](https://apis.io/collections/repsly/open-repsly-products-api/)
+- [Repsly Web Clients Purchase Orders API](https://apis.io/collections/repsly/open-repsly-purchase-orders-api/)
+- [Repsly Web Clients Representatives API](https://apis.io/collections/repsly/open-repsly-representatives-api/)
+- [Repsly Web Clients Visits API](https://apis.io/collections/repsly/open-repsly-visits-api/)
 
-### Repsly Representatives API
+#### Security (3)
 
-Export the field representatives (and back-office users) on the account along with their territories and permissions, plus daily working time records that log each representative's tracked hours.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://repsly-dev.readme.io/reference/getting-started-1](https://repsly-dev.readme.io/reference/getting-started-1)
-- **Base URL:** `https://api.repsly.com/v3`
+- [Repsly Authentication](https://apis.io/security/repsly/repsly-authentication/)
+- [Repsly Domain Security](https://apis.io/security/repsly/repsly-domain-security/)
+- [Repsly Trust Center](https://apis.io/security/repsly/repsly-trust-center/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Representatives
-- Users
-- Working Time
+Published plans, tiers and prices.
 
-#### Properties
+- [Repsly Plans Pricing](https://apis.io/plans/repsly/repsly-plans-pricing/)
 
-- [Documentation](https://repsly-dev.readme.io/reference/getting-started-1)
-- [OpenAPI](openapi/repsly-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/repsly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/repsly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Repsly Visits API
+Published request limits.
 
-Export in-store visits (check-in/check-out, GPS, notes), planned visit schedules over a date range, and visit schedule realizations, and import visit schedules to plan representatives' routes.
+- [Repsly Rate Limits](https://apis.io/rate-limits/repsly/repsly-rate-limits/)
 
-- **Human URL:** [https://repsly-dev.readme.io/reference/getting-started-1](https://repsly-dev.readme.io/reference/getting-started-1)
-- **Base URL:** `https://api.repsly.com/v3`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Visits
-- Schedules
-- Field Activity
+- [Repsly Finops](https://apis.io/finops/repsly/repsly-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://repsly-dev.readme.io/reference/getting-started-1)
-- [OpenAPI](openapi/repsly-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/repsly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/repsly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Repsly Products API
-
-Export products, product lists, and document types, and import (insert or update) product catalog and product packaging data from an ERP so mobile reps always work from current SKUs.
-
-- **Human URL:** [https://repsly-dev.readme.io/reference/getting-started-1](https://repsly-dev.readme.io/reference/getting-started-1)
-- **Base URL:** `https://api.repsly.com/v3`
-
-#### Tags
-
-- Products
-- Product Lists
-- Catalog
-
-#### Properties
-
-- [Documentation](https://repsly-dev.readme.io/reference/getting-started-1)
-- [OpenAPI](openapi/repsly-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/repsly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/repsly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Repsly Forms API
-
-Export completed custom forms and retail audit results (including matrix answers) captured by representatives in the field, using last-form-ID and last-retail-audit-ID cursors.
-
-- **Human URL:** [https://repsly-dev.readme.io/reference/getting-started-1](https://repsly-dev.readme.io/reference/getting-started-1)
-- **Base URL:** `https://api.repsly.com/v3`
-
-#### Tags
-
-- Forms
-- Retail Audits
-- Data Collection
-
-#### Properties
-
-- [Documentation](https://repsly-dev.readme.io/reference/getting-started-1)
-- [OpenAPI](openapi/repsly-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/repsly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/repsly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Repsly Photos API
-
-Export photos captured during visits - shelf and display shots, merchandising evidence, and form/audit attachments - with their metadata and URLs, paginated by a last-photo-ID cursor.
-
-- **Human URL:** [https://repsly-dev.readme.io/reference/getting-started-1](https://repsly-dev.readme.io/reference/getting-started-1)
-- **Base URL:** `https://api.repsly.com/v3`
-
-#### Tags
-
-- Photos
-- Merchandising
-- Media
-
-#### Properties
-
-- [Documentation](https://repsly-dev.readme.io/reference/getting-started-1)
-- [OpenAPI](openapi/repsly-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/repsly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/repsly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Repsly Pricelists API
-
-Export the list of pricelists and the items within a specific pricelist, and import (insert or update) pricelists and their items so order taking uses the correct per-client pricing.
-
-- **Human URL:** [https://repsly-dev.readme.io/reference/getting-started-1](https://repsly-dev.readme.io/reference/getting-started-1)
-- **Base URL:** `https://api.repsly.com/v3`
-
-#### Tags
-
-- Pricelists
-- Pricing
-- Catalog
-
-#### Properties
-
-- [Documentation](https://repsly-dev.readme.io/reference/getting-started-1)
-- [OpenAPI](openapi/repsly-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/repsly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/repsly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Repsly Purchase Orders API
-
-Export purchase orders (and other sales documents) taken by reps in the field, paginated by a last-document-ID cursor, and post status updates back to a sales document after it is processed in the back office.
-
-- **Human URL:** [https://repsly-dev.readme.io/reference/getting-started-1](https://repsly-dev.readme.io/reference/getting-started-1)
-- **Base URL:** `https://api.repsly.com/v3`
-
-#### Tags
-
-- Purchase Orders
-- Orders
-- Sales Documents
-
-#### Properties
-
-- [Documentation](https://repsly-dev.readme.io/reference/getting-started-1)
-- [OpenAPI](openapi/repsly-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/repsly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/repsly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Repsly Import and Export API
-
-The bulk integration surface. Import (POST) clients, products, packages, pricelists, and schedules where Repsly decides per record whether to insert or update, then poll the import job status endpoint by importJobID to confirm completion.
-
-- **Human URL:** [https://repsly-dev.readme.io/reference/getting-started-1](https://repsly-dev.readme.io/reference/getting-started-1)
-- **Base URL:** `https://api.repsly.com/v3`
-
-#### Tags
-
-- Import
-- Export
-- Integration
-
-#### Properties
-
-- [Documentation](https://repsly-dev.readme.io/reference/getting-started-1)
-- [OpenAPI](openapi/repsly-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/repsly.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/repsly.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/repsly)
 - [Website](https://www.repsly.com)
 - [Documentation](https://repsly-dev.readme.io/reference/getting-started-1)
-- [Plans](plans/repsly-plans-pricing.yml)
-- [Rate Limits](rate-limits/repsly-rate-limits.yml)
-- [Fin Ops](finops/repsly-finops.yml)
+- [Blog](https://www.repsly.com/blog)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 26.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 44.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 27.4 |
+| Access clarity | 13.2 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/repsly/](https://apis.io/providers/repsly/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Repsly: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/repsly/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
